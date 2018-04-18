@@ -1,0 +1,125 @@
+<h1 class="big-header text-info">DASHBOARD</h1>
+<div class="row">
+  <div class="col-sm-6 col-md-4 ">
+    <div class="">
+        <% if current_user %>
+            <div class="notice notice-info">
+               <div class="row">
+                   <%= image_tag("iconschool.png",class: "col img-icon") %>     
+                   <div class="col">
+                       <p><strong><%= current_user.school.ministry_code %></strong></p>
+                       <p><strong><%= t('val.school')%><%= current_user.school.school_name %></strong></p>
+                       <p><%= t('val.distric')%>  <strong><%= current_user.school.district %></strong></p>
+                       <p><%= t('val.province')%>  <strong><%= current_user.school.province %></strong></p>
+                   </div>
+               </div>
+               <hr class="my-4">
+            <div class="row">
+                   <%= image_tag("user.png",class: "col img-icon") %>     
+                   <div class="col">
+                       <h4><%= t('val.studentcount') %></h4>
+                       <h1 class="text-danger"><%= number_with_delimiter(current_user.school.students_count, :delimiter => ',')%>  <%= t('val.userpostscript') %></h1>
+                        
+                   </div>
+               </div>
+            </div>
+            <div class="notice notice-info">
+                <div class="form-group">
+                   <h4><strong><u><%= t('val.userinfo') %></u></strong></h4>
+                   <p class=""><strong><%= current_user.prefix %><%= current_user.name %>  <%= current_user.surname %></strong></p>
+                   <p class=""><strong><%= current_user.cardnumber %></strong></p>
+                   <p><%= t('val.position') %>  <%= current_user.position %></p>
+                   <p><strong><%= t('val.lastlogin') %> <%=@userlogintime%></strong></p>
+                 </div> 
+                 <div class="form-group row">
+                     <div class="col ">
+                        <%= link_to t('val.editprofile'), edit_user_registration_path, method: "get" ,class: "btn btn-warning"%>
+                    </div>
+                    <div class="col text-right">
+                        <%= link_to t('val.signout'), destroy_user_session_path, method: "delete" ,class: "btn btn-danger"%>
+                    </div>
+                 </div>
+                 <p><strong><%= t('val.contactadmin') %> <u><%= t('val.adminemail')%></u></strong></p>
+            </div> 
+      <% end %>  
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-8">
+      <div class="row arrow-border">
+            <div class="col-md-3 text-center pt-5">
+                <div class="bar-active-border">
+                       <div class="bar bg-white">
+                          <span class="bar-prec-box"><span class="bar-prec"><%= format('%.2f',@percentall)%></span><span>%</span></span>
+                      </div>
+                </div>
+                <h2>ภาพรวม</h2>
+            </div>
+            <div class="col-md-9 text-center">
+                <div class="row">
+                    <div class="form-group col-12"><h4><%= t('val.pleaseclick')%></h4></div>
+                    <div class="form-group col-md-12 col-lg-6">
+                        <div class="block-text">
+                         <%= link_to  musicteacher_path, method: "get",class: "a-removeunderline" do%> 
+                            <div class="active-border">
+                                <div class="circle">
+                                    <span class="prec-box"><span class="prec"><%= format('%.2f',@percentform1)%></span><span>%</span></span>
+                                </div>
+                            </div>
+                         <%end%>    
+                        <p><%= t('val.form1head')%></p>
+                         <%= link_to musicteacherview_path, method: "get" ,class: "goto-formpage",title: "view" do %>
+                                <%=fa_icon "eye",class: "alert alert-info important-display"%>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12 col-lg-6">
+                        <div class="block-text">
+                        <%= link_to  thaimusic_path, method: "get",class: "a-removeunderline" do%>    
+                            <div class="active-border">
+                                <div class="circle">
+                                    <span class="prec-box"><span class="prec"><%= format('%.2f',@percentform2)%></span><span>%</span></span>
+                                </div>
+                            </div>
+                        <%end%> 
+                        <p><%= t('val.form2head')%></p>
+                    
+                            <%= link_to thaimusicview_path, method: "get" ,class: "goto-formpage",title: "view" do %>
+                                <%=fa_icon "eye",class: "alert alert-info important-display"%>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12 col-lg-6">
+                        <div class="block-text">
+                        <%= link_to  intermusic_path, method: "get",class: "a-removeunderline" do%>   
+                            <div class="active-border">
+                                <div class="circle">
+                                    <span class="prec-box"><span class="prec"><%= format('%.2f',@percentform3)%></span><span>%</span></span>
+                                </div>
+                            </div>
+                        <%end%> 
+                        <p><%= t('val.form3head')%></p>
+                        <%= link_to intermusicview_path, method: "get" ,class: "goto-formpage",title: "view" do %>
+                                <%=fa_icon "eye",class: "alert alert-info important-display"%>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12 col-lg-6">
+                        <div class="block-text">
+                        <%= link_to  folkmusic_path, method: "get",class: "a-removeunderline" do%>   
+                            <div class="active-border">
+                                <div class="circle">
+                                    <span class="prec-box"><span class="prec"><%= format('%.2f',@percentform4)%></span><span>%</span></span>
+                                </div>
+                            </div>
+                        <%end%> 
+                        <p><%= t('val.form4head')%></p>
+                        <%= link_to folkmusicview_path, method: "get" ,class: "goto-formpage",title: "view" do %>
+                                <%=fa_icon "eye",class: "alert alert-info important-display"%>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+  </div>
+</div>  

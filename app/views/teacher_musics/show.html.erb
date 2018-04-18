@@ -1,0 +1,34 @@
+ <div class="container container-insert">
+    <%= form_for :qparam , as: :post, url: musicteachersave_path,:html => {:class => ''} do |f| %>
+         <div class="row notice notice-lg">
+           <div class="active-border">
+                   <div class="circle">
+                        <span class="prec-box"><span class="prec"><%= format('%.2f',@formpercent)%></span>%</span>
+                   </div>
+           </div>
+           <div class="col text-header">
+               <div class="form-group">
+                   <h1><%= t('val.form1head')%></h1>
+                   <h5><%= t('val.form1pleasinsert')%><span>    </span><%= f.text_field :countteachers,:value => session["formparam"]["countteachers"] ,:disabled => true,size: 2%>
+                   </h5>
+               </div>
+               <hr class="my-3">
+               <div class="row">
+                   <div class="col">
+                       <%= link_to t('val.banktodashboard'), dashboard_path, method: :get ,class: "btn btn-primary"%>
+                   </div>
+               </div>
+           </div>
+        </div>
+        <% if flash[:question_errors] %>
+                <% flash[:question_errors].each do |error| %>
+                  <div class="alert alert-info " role="alert"><%=error%></div>
+                <%end%>
+        <%end%>
+         <div class="dbTeacherSet row justify-content-md-center">
+                 <% @teacers.each_with_index do |t,index| %>
+                     <%= render partial: "newteacher" , locals: {count: (index+1),f: f,data: session["formparam"],id: t.id,style: "success",viewonly: true} %>
+                 <% end %>
+        </div>
+    <% end %>
+</div>

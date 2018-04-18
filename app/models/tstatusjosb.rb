@@ -1,0 +1,2 @@
+class Tstatusjosb < ApplicationRecord
+end

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workspace</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="p-4">
+    <div class="container">
+        <header class="paragraphs form-group">
+            <div class="row form-group">
+                <div class="col" style="max-width:100px"><%= image_tag("logo.png",style: "height:120px") %></div>
+                <div class="col"><h2 class="text-primary"><%= t('val.headertext') %></h2></div>
+            </div>
+        </header>
+        <% if notice %>
+           <p class="notice-alert notice"><%= notice %></p>
+          <% end %>
+          <% if alert %>
+           <p class="notice-alert alert"><%= alert %></p>
+          <% end %>
+        <div class="contents">
+           <%= yield %>
+        </div>
+    </div> 
+    <a href="#" class="scrollToTop"><i class="fa fa-angle-up"></i> Back to top</a>
+</body>
+</html>

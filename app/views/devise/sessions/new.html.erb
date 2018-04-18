@@ -1,0 +1,47 @@
+<div class="paragraphs form-group">
+    <div class="row text-center">
+        <div class="col-12">
+            <h5><%= t('val.headsub1')%></h5>
+        </div>
+        <div class="col-12">
+            <h5 class="text-danger"><%= t('val.headwarning')%></h5>
+        </div>
+    </div>
+</div>
+<div class="card-group">
+  <div class="card border-0 ">
+    <div class="card-body">
+    </div>
+    <div class="card-footer border-0 bg-white">
+       <%= link_to t("val.signuptext") , new_user_registration_path, method: "get" ,class: "btn btn-primary  btn-lg form-control box-shadow--8dp "%> 
+    </div>
+  </div>
+  
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),html: {class: "card border-0"}) do |f| %>
+      <%= f.error_notification %>
+      <div class="card-body">
+        <div class="form-group">
+          <%= f.input :login, required: true, autofocus: true ,label: false,placeholder: "Username or Email"%>
+        </div>
+        <div class="form-group">
+          <%= f.input :password, required: true ,label: false,placeholder: "Password" %>
+        </div>
+        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      </div>
+      <div class="card-footer border-0 bg-white">
+        <%= f.button :submit, t("val.signintext") ,class: "btn btn-success  btn-lg form-control box-shadow--8dp "%>
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+        <% end -%>
+      </div>
+  <% end %>
+</div>
+<div class="card-group">
+  <div class="card border-0 ">
+      <div class="card-footer border-0 bg-white"></div>
+  </div>
+  <div class="card border-0 ">
+      <div class="card-footer border-0 bg-white text-right">
+         <%= link_to t("val.fogetpass"), new_password_path(resource_name) %><br />
+      </div>
+  </div>
+</div>

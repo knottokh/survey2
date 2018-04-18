@@ -1,0 +1,2 @@
+class Ttopic < ApplicationRecord
+end

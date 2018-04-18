@@ -1,0 +1,2 @@
+class Tposition < ApplicationRecord
+end

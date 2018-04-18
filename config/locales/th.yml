@@ -1,0 +1,275 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+#---
+th:
+  val:
+    headertext: "โครงการศึกษาสภาพและแนวทางในการจัดการทรัพยากรดนตรีศึกษาใน สถานศึกษาของประเทศไทย: มิติการกำหนดและขับเคลื่อนนโยบายกระทรวงวัฒนธรรม"
+    headsub1: "สืบเนื่องจาก คณะกรรมการวัฒนธรรมแห่งชาติ (กวช.) เห็นชอบให้กระทรวงวัฒนาธรรมดำเนินการตามนโยบายส่งเสริมให้เด็กไทยทุกคน
+    เล่นดนตรีไทยเป็น 1 ชนิด ภายใน 5 ปี ดังนั้นจึงมีความจำเป็นต้องเก็บรวบรวมข้อมูลทรัพยากรด้านดนตรีศึกษาของสถานศึกษา
+    ในประเทศไทยเพื่อใช้เป็นข้อมูลหลักสำหรับการกำหนดนโยบายสนับสนุนสถานศึกษาให้เป็นไปอย่างเหมาะสม และมีประสิทธิผล"
+    headwarning: "กระทรวงวัฒนธรรมจึงใคร่ขอความกรุณาสถานศึกษาให้ข้อมูลที่ครบถ้วน และตรงตามสภาพจริง ข้อมูลของท่านจะมีส่วนสำคัญอย่าง
+    ยิ่งในการกำหนดนโยบาย และวางแผน
+    เพื่อพัฒนาการจัดการเรียนการสอนดนตรีศึกษาของประเทศ"
+    privatehead: "นโยบายความเป็นส่วนตัว*"
+    private1: "1. กระทรวงวัฒนธรรม ให้ความสำคัญอย่างยิ่งกับข้อมูลส่วนบุคคลและ
+ความเป็นส่วนตัวของท่าน การจัดการข้อมูลต่างๆ ของท่านจะเป็นไป
+อย่างปลอดภัย และนำใช้เฉพาะการจัดการฐานข้อมูลในการวิจัยเท่านั้น"
+    private21: "2. กระทรวงวัฒนธรรม สัญญาว่าจะ"     
+    private221: "เก็บรักษา"
+    private222: "ไม่เปิดเผย"
+    private23: "และ"
+    private24: "ป้องกัน"
+    private25: "การเข้าถึงข้อมูลส่วนตัวต่าง ๆ ที่สามารถระบุตัวตนของท่านออกสู่สาธารณะ"
+    schoolblank: "ชื่อสถานศึกษา หรือ รหัสสถานศึกษา*"
+    fogetpass: "ลืมรหัสผ่าน?"
+    pleaseclick: "โปรดคลิกเลือกที่แผนภูมิ เพื่อดำเนินการกรอก/แก้ไขข้อมูล"
+    form1head: "ข้อมูลครูดนตรี"
+    form2head: "ข้อมูลเครื่องดนตรีไทย"
+    form3head: "ข้อมูลเครื่องดนตรีสากลและดุริยางค์"
+    form4head: "ข้อมูลเครื่องดนตรีพื้นบ้าน"
+    form1pleasinsert : "สถานศึกษามีจำนวนครูที่สอนวิชาดนตรีจำนวน"
+    form2pleasinsert: "โปรดให้ข้อมูลจำนวนเครื่องดนตรีไทยที่อยู่ในสถานศึกษาของท่าน"
+    form3pleasinsert: "โปรดให้ข้อมูลจำนวนเครื่องดนตรีสากลที่อยู่ในสถานศึกษาของท่าน"
+    form4pleasinsert: "โปรดให้ข้อมูลจำนวนเครื่องดนตรีพื้นบ้านที่อยู่ในสถานศึกษาของท่าน"
+    distric: "อำเภอ/เขต"
+    province: "จังหวัด"
+    studentcount: "จำนวนนักเรียน"
+    school: "โรงเรียน"
+    userpostscript: "คน"
+    userinfo: "ข้อมูลผู้ใช้งาน"
+    position: "ตำแหน่ง"
+    lastlogin: "เข้าสู่ระบบเมื่อ"
+    contactadmin: "ติดต่อผู้ดูแลระบบ"
+    adminemail: "merm.cu@gmail.com"
+    signout: "ออกจากระบบ"
+    editprofile: "แก้ไขข้อมูลผู้ใช้งาน"
+    confirmmusicdel: "ยืนยันการลบ?"
+    banktodashboard: "กลับหน้า Dashboard"
+    backtosignin: "กลับไปยังหน้าแรก"
+    signintext: "เข้าสู่ระบบกรอกข้อมูล"
+    signuptext: "ลงทะเบียนผู้ให้ข้อมูลครั้งแรก"
+    signupconfirm: "ยืนยัน"
+    upddatetext: "บันทึก"
+    addsignuserandpass: "กำหนดชื่อผู้ใช้งานและรหัสผ่าน"
+    headersignup: "ลงทะเบียนผู้ให้ข้อมูล"
+    headedituse: "แก้ไขข้อมูลส่วนตัว"
+    teachers:
+        prefix: "คำนำหน้า *"
+        name: "ชื่อ *"
+        surname: "นามสกุล *"
+        status: "สภานภาพ"
+        position: "ตำแหน่งที่บรรจุ"
+        degree: "วุฒิการศึกษาสูงสุด"
+        branch: "สาขาวิชาที่สำเร็จการศึกษา"
+        university: "สถาบันที่สำเร็จการศึกษา"
+        topic: "ภาระงานสอนที่ได้รับมอบหมาย (กลุ่มวิชา)"
+        remark: "ภาระงานอื่นๆ (ถ้ามี)"
+        otherpleaseselect: "อื่นๆ (โปรดระบุ)"
+    users:
+        school: "สถานศึกษาของท่าน"
+        prefix: "คำนำหน้าชื่อ"
+        name: "ชื่อ"
+        surname: "สกุล"
+        cardnumber: "เลขประจำตัวประชาชน"
+        position: "ตำแหน่ง"
+        phone: "เบอร์โทรติดต่อ"
+        email: "E-Mail"
+        username: "ชื่อผู้ใช้ (username)"
+        password: "โปรดระบุรหัสผ่านส่วนตัว"
+        password_confirmation: "โปรดระบุรหัสผ่านส่วนตัวอีกครั้ง"
+        newpassword: "ระบุรหัสผ่านส่วนตัวใหม่"
+        newpassword_confirmation: "ระบุรหัสผ่านส่วนตัวใหม่อีกครั้ง"
+        current_confirmation: "โปรดระบุรหัสผ่านปัจจุบัน"
+  activerecord:
+    attributes:
+      user:
+        #email: "E-mail address"
+    errors:
+      models:
+        user:
+          attributes:
+            #email:
+            #  blank: "eee is required"  
+  date:
+    abbr_day_names:
+    - อา
+    - จ
+    - อ
+    - พ
+    - พฤ
+    - ศ
+    - ส
+    abbr_month_names:
+    -
+    - ม.ค.
+    - ก.พ.
+    - มี.ค.
+    - เม.ย.
+    - พ.ค.
+    - มิ.ย.
+    - ก.ค.
+    - ส.ค.
+    - ก.ย.
+    - ต.ค.
+    - พ.ย.
+    - ธ.ค.
+    day_names:
+    - อาทิตย์
+    - จันทร์
+    - อังคาร
+    - พุธ
+    - พฤหัสบดี
+    - ศุกร์
+    - เสาร์
+    formats:
+      default: "%d-%m-%Y"
+      long: "%d %B %Y"
+      short: "%d %b"
+    month_names:
+    -
+    - มกราคม
+    - กุมภาพันธ์
+    - มีนาคม
+    - เมษายน
+    - พฤษภาคม
+    - มิถุนายน
+    - กรกฎาคม
+    - สิงหาคม
+    - กันยายน
+    - ตุลาคม
+    - พฤศจิกายน
+    - ธันวาคม
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours: ประมาณ %{count} ชั่วโมง
+      about_x_months: ประมาณ %{count} เดือน
+      about_x_years: ประมาณ %{count} ปี
+      almost_x_years: เกือบ %{count} ปี
+      half_a_minute: ครึ่งนาที
+      less_than_x_minutes: น้อยกว่า %{count} นาที
+      less_than_x_seconds: น้อยกว่า %{count} วินาที
+      over_x_years: มากกว่า %{count} ปี
+      x_days: "%{count} วัน"
+      x_minutes: "%{count} นาที"
+      x_months: "%{count} เดือน"
+      x_seconds: "%{count} วินาที"
+    prompts:
+      day: วัน
+      hour: ชั่วโมง
+      minute: นาที
+      month: เดือน
+      second: วินาที
+      year: ปี
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: ต้องถูกยอมรับ
+      blank: ต้องไม่เว้นว่างเอาไว้
+      confirmation: ไม่ตรงกับการยืนยัน
+      empty: ต้องไม่เว้นว่างเอาไว้
+      equal_to: ต้องมีค่าเท่ากับ %{count}
+      even: ต้องเป็นจำนวนคู่
+      exclusion: ไม่ได้รับอนุญาตให้ใช้
+      greater_than: ต้องมากกว่า %{count}
+      greater_than_or_equal_to: ต้องมากกว่าหรือเท่ากับ %{count}
+      inclusion: ไม่ได้อยู่ในรายการ
+      invalid: ไม่ถูกต้อง
+      less_than: ต้องมีค่าน้อยกว่า %{count}
+      less_than_or_equal_to: ต้องมีค่าน้อยกว่าหรือเท่ากับ %{count}
+      not_a_number: ไม่ใช่ตัวเลข
+      not_an_integer: ไม่ใช่จำนวนเต็ม
+      odd: ต้องเป็นจำนวนคี่
+      taken: ถูกใช้ไปแล้ว
+      too_long: ยาวเกินไป (ต้องไม่เกิน %{count} ตัวอักษร)
+      too_short: สั้นเกินไป (ต้องยาวกว่า %{count} ตัวอักษร)
+      wrong_length: มีความยาวไม่ถูกต้อง (ต้องมีความยาว %{count} ตัวอักษร)
+    template:
+      body: 'โปรดตรวจสอบข้อมูลในช่องต่อไปนี้:'
+      header: พบข้อผิดพลาด %{count} ประการ ทำให้ไม่สามารถบันทึก%{model}ได้
+  helpers:
+    select:
+      prompt: โปรดเลือก
+    submit:
+      create: สร้าง%{model}
+      submit: บันทึก%{model}
+      update: ปรับปรุง%{model}
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%n %u"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: บาท
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: พันล้าน
+          million: ล้าน
+          quadrillion: พันล้านล้าน
+          thousand: พัน
+          trillion: ล้านล้าน
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte: ไบต์
+          gb: จิกะไบต์
+          kb: กิโลไบต์
+          mb: เมกะไบต์
+          tb: เทระไบต์
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ", และ "
+      two_words_connector: " และ "
+      words_connector: ", "
+  time:
+    am: ก่อนเที่ยง
+    formats:
+      default: "%a %d %b %Y %H:%M:%S %z"
+      long: "%d %B %Y %H:%M น."
+      short: "%d %b %H:%M น."
+    pm: หลังเที่ยง

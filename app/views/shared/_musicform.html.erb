@@ -1,0 +1,70 @@
+<div class="col-sm col-md-8 col-lg-7 notice notice-<%= (!style.nil?? style : 'default') %>">
+                    <h3><strong><%= qr.title%></strong></h3>
+                    <table class="table table-xs borderless bg-white">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th class="text-center">ทั้งหมด</th>
+                                <th class="text-center">ใช้งานได้จริง</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if !question.nil? %>
+                                <% question.each do |q|  %>
+                                    <tr>
+                                        <td><%= q.title%></td>
+                                        <td  class="text-right">จำนวน</td>
+                                        <td class="text-center"><%= f.text_field :"qid-#{q.id}", :disabled => viewonly ,:value => session["formparam"]["qid-#{q.id}"] ,class: "text-center", size: 2%></td>
+                                        <td class="text-center"><%= f.text_field :"qid-#{q.id}-2", :disabled => viewonly,:value => session["formparam"]["qid-#{q.id}-2"],class: "text-center" , size: 2%> </td>
+                                    </tr>
+                                <% end %>
+                            <% end %>    
+                        </tbody>
+                        <tbody>
+                             <% if !answers.nil? %>
+                                <% answers.each do |a|  %>
+                                    <tr>
+                                        
+                                        <td>
+                                            <% if !viewonly %>
+                                            <% case delmusicpath 
+                                               when "thai" %>
+                                                    <%= link_to thaimusicdel_path(:id => a.id), method: :delete, data: { confirm: t('val.confirmmusicdel') } do%>
+                                                        <%=fa_icon "trash" , class: "text-danger"%>
+                                                    <% end %>
+                                              <% when "inter" %>
+                                                    <%= link_to intermusicdel_path(:id => a.id), method: :delete, data: { confirm: t('val.confirmmusicdel') } do%>
+                                                        <%=fa_icon "trash" , class: "text-danger"%>
+                                                    <% end %>
+                                              <% when "folk" %>
+                                                    <%= link_to folkmusicdel_path(:id => a.id), method: :delete, data: { confirm: t('val.confirmmusicdel') } do%>
+                                                        <%=fa_icon "trash" , class: "text-danger"%>
+                                                    <% end %>        
+                                            <% end %>
+                                            <% end %>
+                                            <%= f.text_field :"titleans-#{a.id}",:value => session["formparam"]["titleans-#{a.id}"], :disabled => viewonly%>
+                                            
+                                        </td>
+                                            
+                                        <td  class="text-right">จำนวน</td>
+                                        <td class="text-center"><%= f.text_field :"ans-#{a.id}", :disabled => viewonly,:value => session["formparam"]["ans-#{a.id}"] ,class: "text-center", size: 2%></td>
+                                        <td class="text-center"><%= f.text_field :"ans-#{a.id}-2", :disabled => viewonly,:value => session["formparam"]["ans-#{a.id}-2"],class: "text-center" , size: 2%> </td>
+                                    </tr>
+                                <% end %>
+                            <% end %>
+                        </tbody>
+                         <% if !viewonly %>
+                                <tbody class="musicOtherSet">
+                                     <%= render partial: "shared/otherform" , locals: {index: qr.id} %>
+                                </tbody>
+                                <tbody class="new_music_form" style="display:none;">
+                                     <%= render partial: "shared/otherform" , locals: {index: qr.id}%>
+                                </tbody>
+                          <% end %>
+                    </table>
+                    <% if !viewonly %>
+                    <a href="javascript:;" class="addNewOtherMusic"><%=fa_icon "plus-square" , class: "text-info"%> เพิ่มรายการ<%=qr.title%> อื่นๆ</a>
+                    <% end %>
+</div>
+  

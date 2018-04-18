@@ -1,0 +1,26 @@
+ <div class="container container-insert">
+     <%= form_for :qparam , as: :post, url: intermusicsave_path,:html => {:class => ''} do |f| %> 
+        <div class="row notice notice-lg">
+           <div class="active-border">
+                   <div class="circle">
+                        <span class="prec-box"><span class="prec"><%= format('%.2f',@formpercent)%></span>%</span>
+                   </div>
+           </div>
+           <div class="col text-header">
+               <h1><%= t('val.form3head')%></h1>
+               <h5 class="text-danger"><%= t('val.form3pleasinsert')%></h5>
+               <hr class="my-3">
+               <div class="row">
+                   <div class="col">
+                       <%= link_to t('val.banktodashboard'), dashboard_path, method: :get ,class: "btn btn-primary"%>
+                   </div>
+               </div>
+           </div>
+        </div> 
+        <div class="row justify-content-md-center">
+              <% @formarray.each_with_index do |formitem,index| %>    
+                  <%= render partial: "shared/musicform" ,locals: {question: formitem["questions"],answers: formitem["answers"] ,f: f,qr: formitem["musicin"],style: "#{@musicclass[index % @musicclass.length]}",delmusicpath: "inter",viewonly: true} %> 
+              <% end %>
+         </div>
+    <% end %>
+</div>

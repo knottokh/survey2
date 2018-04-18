@@ -1,0 +1,89 @@
+<div class="col-sm col-md-8 col-lg-7 notice notice-<%= (!style.nil?? style : 'default') %> OherMusicForm">
+    <div class="form-group row">
+       <% if !viewonly %>    
+       <div class="col">
+          <% if id.nil?%>
+            <a href="javascript:;" onclick="var r=confirm('<%= t('val.confirmmusicdel')%>'); if(r) {$(this).closest('.OherMusicForm').remove();} return false;"><%=fa_icon "times-circle" , class: "text-danger"%></a>
+          <% else %>
+            <%= link_to musicteacherdel_path(:id => id), method: :delete, data: { confirm:t('val.confirmmusicdel') } do %>
+                <%=fa_icon "trash" , class: "text-danger"%>
+            <% end %>
+          <% end %>
+        </div>
+         <% end %>
+        <div class="col text-right">
+             <span class="indexcount h3 mr-2"><%= count %></span>
+             <a href="javascript:;" onclick="$(this).closest('.notice').find('.extrainfo').toggleClass('toggle-hide');return false;"><%=fa_icon "angle-double-down 2x" , class: "text-info"%></a>
+        </div>  
+    </div>
+    <div class="form-group row">
+        <label class="col-md-2 text-right"><%= t('val.teachers.prefix')%> : </label>
+        <div class="col-md-2">
+          <%= f.text_field "#{ id.nil?? "prefix][" : "teaprefix-#{id}"}",:value => data["teaprefix-#{id}"], size: 5 ,class: "form-control form-control-sm" ,:disabled => viewonly %>
+        </div>
+        <label class="col-md-3 text-right"><%= t('val.teachers.name')%> : </label>
+        <div class="col-md-5">
+           <%= f.text_field "name#{ id.nil?? "][" : "-#{id}"}",:value => data["name-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly %>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-md-4 text-right"><%= t('val.teachers.surname') %> : </label>
+        <div class="col-md-8">
+          <%= f.text_field "surname#{ id.nil?? "][" : "-#{id}"}",:value => data["surname-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly %>
+        </div>
+    </div>
+    <div class="extrainfo toggle-hide">
+        <div class="form-group row">
+            <label class="col-md-4 text-right"><%= t('val.teachers.status')%> : </label>
+            <div class="col-md-8">
+              <%= f.select(:"status#{ id.nil?? "][" : "-#{id}"}",@teastatus.map { |object| [object.title, object.title, {}] }, {:include_blank  => '--เลือก--',
+                            :selected =>  data["status-#{id}"]
+                      },{ :class => 'form-control form-control-sm' ,:disabled => viewonly})%>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4 text-right"><%= t('val.teachers.position')%> : </label>
+            <div class="col-md-8">
+              <%= f.select(:"position#{ id.nil?? "][" : "-#{id}"}",@teaposition.map { |object| [object.title, object.title, {}] }.concat([t('val.teachers.otherpleaseselect')]), {:include_blank  => '--เลือก--',
+                            :selected =>  data["position-#{id}"]
+                      },{ :class => 'form-control form-control-sm select-other-howtext',:onchange => "setOtherShowHide(this.value,this)" ,:disabled => viewonly})%>
+              <%= f.text_field "otherposition#{ id.nil?? "][" : "-#{id}"}",:value => data["otherposition-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly ,style: "display:#{ (data["otherposition-#{id}"].nil? || data["otherposition-#{id}"].empty? ) ? "none" : "block"};" %>            
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 text-right"><%= t('val.teachers.degree')%> : </label>
+            <div class="col-md-2">
+              <%= f.text_field "degree#{ id.nil?? "][" : "-#{id}"}",:value => data["degree-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly %>
+            </div>
+            <label class="col-md-4 text-right"><%= t('val.teachers.branch')%> : </label>
+            <div class="col-md-3">
+              <%= f.text_field "branch#{ id.nil?? "][" : "-#{id}"}",:value => data["branch-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly%>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4 text-right"><%= t('val.teachers.university')%> : </label>
+            <div class="col-md-8">
+              <%= f.select(:"university#{ id.nil?? "][" : "-#{id}"}",@teaunivers.map { |object| [object.title, object.title, {}] }.concat([t('val.teachers.otherpleaseselect')]), {:include_blank  => '--เลือก--',
+                            :selected =>  data["university-#{id}"]
+                      },{ :class => 'form-control form-control-sm select-other-howtext',:onchange => "setOtherShowHide(this.value,this)" ,:disabled => viewonly})%>
+              <%= f.text_field "otheruniversity#{ id.nil?? "][" : "-#{id}"}",:value => data["otheruniversity-#{id}"],class: "form-control form-control-sm",:disabled => viewonly,style: "display:#{ (data["otheruniversity-#{id}"].nil? || data["otheruniversity-#{id}"].empty? ) ? "none" : "block"};" %>  
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4 text-right"><%= t('val.teachers.topic')%> : </label>
+            <div class="col-md-8">
+              <%= f.select(:"topic#{ id.nil?? "][" : "-#{id}"}",@teatopic.map { |object| [object.title, object.title, {}] }.concat([t('val.teachers.otherpleaseselect')]), {:include_blank  => '--เลือก--',
+                            :selected =>  data["topic-#{id}"]
+                      },{ :class => 'form-control form-control-sm select-other-howtext',:onchange => "setOtherShowHide(this.value,this)" ,:disabled => viewonly})%>
+              <%= f.text_field "othertopic#{ id.nil?? "][" : "-#{id}"}",:value => data["othertopic-#{id}"],class: "form-control form-control-sm",:disabled => viewonly,style: "display:#{ (data["othertopic-#{id}"].nil? || data["othertopic-#{id}"].empty? ) ? "none" : "block"};" %>  
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4 text-right"><%= t('val.teachers.remark')%> : </label>
+            <div class="col-md-8">
+              <%= f.text_area "remark#{ id.nil?? "][" : "-#{id}"}",:value => data["remark-#{id}"],class: "form-control form-control-sm" ,:rows => 2 ,:disabled => viewonly%>
+            </div>
+        </div>
+    </div>
+    
+</div>    
