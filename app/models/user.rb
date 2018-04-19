@@ -1,10 +1,17 @@
 class User < ApplicationRecord
+  scope :school_registed, -> {
+     select(:school_id).map(&:school_id).uniq.count
+  }  
+  scope :user_registed, -> {
+     where.not(school_id: nil).where(role: "user").count
+  }  
+  
   attr_accessor :login
   
   validates :username,length: {minimum: 5}, uniqueness: true
   #digest_password
   #has_secure_password
-  #validates :school_id, presence: true
+  validates :school_id, presence: true
   validates :prefix, presence: true
   validates :name, presence: true
   validates :surname, presence: true

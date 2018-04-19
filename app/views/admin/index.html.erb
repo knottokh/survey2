@@ -1,1 +1,84 @@
-Admin Page
+ <div class="container">
+    <div class="row notice">
+          <div class="col">
+              <h1>Admin’s DASHBOARD</h1>
+          </div>
+         <div class="col text-right">
+               <%= link_to t('val.signout'), destroy_user_session_path, method: "delete" ,class: "btn btn-danger"%>
+         </div>
+    </div> 
+    <div class="row pt-2">
+        <div class="col-12 col-sm-6 col-md-4">
+            <div class="row">
+                   <%= image_tag("iconschool.png",class: "col img-icon") %>     
+                   <div class="col">
+                       <p><strong><%= t('val.admins.readyregister') %></strong></p>
+                       <h1 class="text-danger"><%= number_with_delimiter(@school_registed_count, :delimiter => ',')%>  <%= t('val.admins.school') %></h1>
+                   </div>
+             </div>
+             <div class="row">
+                   <%= image_tag("user.png",class: "col img-icon") %>     
+                   <div class="col">
+                       <p><strong><%= t('val.admins.userregis') %></strong></p>
+                       <h1 class="text-danger"><%= number_with_delimiter(@user_count, :delimiter => ',')%>  <%= t('val.admins.people') %></h1>
+                   </div>
+             </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+            <div class="row">
+                <div class="col text-center">
+                     <div class="active-border">
+                          <div class="circle">
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',@school_registed_percent)%></span><span>%</span></span>
+                           </div>
+                     </div>
+                     <p><%= t('val.admins.readyregister')%></p>
+                </div>
+                <div class="col text-center">
+                     <div class="active-border">
+                          <div class="circle">
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',70)%></span><span>%</span></span>
+                           </div>
+                     </div>
+                     <p><%= t('val.admins.insertsucess')%></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+            <div class="row">
+                 <div class="col-12 col-sm-6 text-center">
+                     <div class="active-border active-border-sm">
+                          <div class="circle">
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',20)%></span><span>%</span></span>
+                           </div>
+                     </div>
+                     <p><%= t('val.admins.form1head')%></p>
+                 </div>
+                 <div class="col-12 col-sm-6 text-center">
+                     <div class="active-border active-border-sm">
+                          <div class="circle">
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',50)%></span><span>%</span></span>
+                           </div>
+                     </div>
+                     <p><%= t('val.admins.form2head')%></p>
+                 </div>
+                 <div class="col-12 col-sm-6 text-center">
+                     <div class="active-border active-border-sm">
+                          <div class="circle">
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',85)%></span><span>%</span></span>
+                           </div>
+                     </div>
+                     <p><%= t('val.admins.form3head')%></p>
+                 </div>
+                 <div class="col-12 col-sm-6 text-center">
+                     <div class="active-border active-border-sm">
+                          <div class="circle">
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',100)%></span><span>%</span></span>
+                           </div>
+                     </div>
+                     <p><%= t('val.admins.form4head')%></p>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 @import "bootstrap";
-@import 'bootstrap-select';
+//@import 'bootstrap-select';
 @import "font-awesome";
+@import "select2";
 
 @font-face {
     font-family: 'Quark';
@@ -127,6 +128,26 @@ body{
         linear-gradient(90deg, #A2ECFB 50%, transparent 50%);
     
 }
+.active-border-sm{
+   width: 70px;
+   height: 70px; 
+   .circle{
+        position: relative;
+        top: 0px;
+        left: 0px;
+        text-align: center;
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        background-color: #fff;
+    }
+    .prec-box{
+        position: relative;
+        font-size: 18px;
+        left:0.5rem;
+    }
+    
+}
 .bar-prec-box{
     position:absolute;
     left:calc(50% - 15px);
@@ -156,7 +177,7 @@ body{
 
 .has-error{
     .help-block{color:#dc3545}
-    input,select {border:1px solid #dc3545}
+    input,select,span.select2{border:1px solid #dc3545}
 }
 p.help-block{color:#45ABCD}
 .error{
@@ -256,4 +277,8 @@ p.help-block{color:#45ABCD}
 .important-display{
     display:block!important;
     opacity:1!important;
+}
+
+.select2-selection{
+    border:0!important;
 }

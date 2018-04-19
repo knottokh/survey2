@@ -9,7 +9,7 @@
            <div class="col text-header">
                <div class="form-group">
                    <h1><%= t('val.form1head')%></h1>
-                   <h5><%= t('val.form1pleasinsert')%><span>    </span><%= f.text_field :countteachers,:value => session["formparam"]["countteachers"] ,:disabled => true,size: 2%>
+                   <h5><%= t('val.form1pleasinsert')%><span>    </span><%= f.text_field :countteachers,:value => flash["formparam"]["countteachers"] ,:disabled => true,size: 2%>
                    </h5>
                </div>
                <hr class="my-3">
@@ -27,7 +27,7 @@
         <%end%>
          <div class="dbTeacherSet row justify-content-md-center">
                  <% @teacers.each_with_index do |t,index| %>
-                     <%= render partial: "newteacher" , locals: {count: (index+1),f: f,data: session["formparam"],id: t.id,style: "success",viewonly: true} %>
+                     <%= render partial: "newteacher" , locals: {count: (index+1),f: f,data: flash["formparam"],id: t.id,style: "success",viewonly: true} %>
                  <% end %>
         </div>
     <% end %>

@@ -5,14 +5,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-   def new
-      @school = School.all;
-      super
-   end
+   #def new
+   #    super
+   #end
 
   # POST /resource
    def create
-        @school = School.all;
         build_resource(sign_up_params)
 
         resource.save

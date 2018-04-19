@@ -41,6 +41,8 @@ gem 'bootstrap', '~> 4.0.0'
 #gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bootstrap-select-rails', '~> 1.12', '>= 1.12.4'
 
+gem "select2_rails" , '~> 4.0', '<= 4.0.1'
+
 #font
 gem "font-awesome-rails"
 

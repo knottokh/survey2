@@ -72,6 +72,10 @@ th:
     addsignuserandpass: "กำหนดชื่อผู้ใช้งานและรหัสผ่าน"
     headersignup: "ลงทะเบียนผู้ให้ข้อมูล"
     headedituse: "แก้ไขข้อมูลส่วนตัว"
+    headforgetpassword: "ลืมรหัสผ่าน?"
+    headchangepassword: "เปลี่ยนรหัสผ่าน"
+    sendmailchnagepass: "ยืนยันเพื่อส่งเมลล์"
+    changepassowrd: "ยืนยันเพื่อเปลี่ยนรหัสผ่าน"
     teachers:
         prefix: "คำนำหน้า *"
         name: "ชื่อ *"
@@ -99,6 +103,16 @@ th:
         newpassword: "ระบุรหัสผ่านส่วนตัวใหม่"
         newpassword_confirmation: "ระบุรหัสผ่านส่วนตัวใหม่อีกครั้ง"
         current_confirmation: "โปรดระบุรหัสผ่านปัจจุบัน"
+    admins:
+        readyregister: "ลงทะเบียนแล้ว"
+        school: "โรงเรียน"
+        userregis: "จำนวนผู้กรอกข้อมูลที่ลงทะเบียนกับระบบ"
+        people: "คน"
+        insertsucess: "กรอกข้อมูลสมบูรณ์"
+        form1head: "ครูดนตรี"
+        form2head: "เครื่องดนตรีไทย"
+        form3head: "เครื่องดนตรีสากลและดุริยางค์"
+        form4head: "เครื่องดนตรีพื้นบ้าน"
   activerecord:
     attributes:
       user:

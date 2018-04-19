@@ -3,10 +3,10 @@ class FolkMusicsController < ApplicationController
     before_action :is_user!
     def index
         @master_case = 0; 
-        #if session["formparam"].nil? 
-        session["formparam"]= {}
+        #if flash["formparam"].nil? 
+        flash["formparam"]= {}
         #end
-        formdata = getMusicFormInfo(4,session["formparam"])
+        formdata = getMusicFormInfo(4,flash["formparam"])
         @formarray = formdata["alldata"]
         @formpercent = formdata["percent"]
         @musicclass = classMusicNotice
@@ -14,10 +14,10 @@ class FolkMusicsController < ApplicationController
     end
     def show
         @master_case = 0; 
-        #if session["formparam"].nil? 
-        session["formparam"]= {}
+        #if flash["formparam"].nil? 
+        flash["formparam"]= {}
         #end
-        formdata = getMusicFormInfo(4,session["formparam"])
+        formdata = getMusicFormInfo(4,flash["formparam"])
         @formarray = formdata["alldata"]
         @formpercent = formdata["percent"]
         @musicclass = classMusicNotice

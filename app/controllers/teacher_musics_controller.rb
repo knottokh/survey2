@@ -7,9 +7,9 @@ class TeacherMusicsController < ApplicationController
     before_action :authenticate_user_per_page!, only: [:show]
     def index
         @master_case = 0; 
-        session["formparam"]= {}
-        #if session["formparam"].nil? 
-        #    session["formparam"]= {}
+        flash["formparam"]= {}
+        #if flash["formparam"].nil? 
+        #    flash["formparam"]= {}
         #end
                 
         @teastatus = Tstatusjosb.all
@@ -26,7 +26,7 @@ class TeacherMusicsController < ApplicationController
         if !questioncont.nil?
             answer = Answer.where(:question_id=>questioncont.id).where(:school_id=>user.school_id).first
             if !answer.nil?
-                    session["formparam"]["countteachers"] = answer.answer
+                    flash["formparam"]["countteachers"] = answer.answer
                     if !answer.answer.nil? && !answer.answer.empty?
                         anscount = anscount + 1
                     end
@@ -37,31 +37,31 @@ class TeacherMusicsController < ApplicationController
         @teacers = Tanswer.where(:school_id=>user.school_id)
         @teacers.each do |tea|
             if !tea.nil?
-                session["formparam"]["teaprefix-#{tea.id}"] = tea.prefix
-                session["formparam"]["name-#{tea.id}"] = tea.name
-                session["formparam"]["surname-#{tea.id}"] = tea.surname
-                session["formparam"]["status-#{tea.id}"] = tea.status
-                session["formparam"]["position-#{tea.id}"] = tea.position
+                flash["formparam"]["teaprefix-#{tea.id}"] = tea.prefix
+                flash["formparam"]["name-#{tea.id}"] = tea.name
+                flash["formparam"]["surname-#{tea.id}"] = tea.surname
+                flash["formparam"]["status-#{tea.id}"] = tea.status
+                flash["formparam"]["position-#{tea.id}"] = tea.position
                 findotherpos = Tposition.where(:title => tea.position)
                 if findotherpos.length == 0 && !tea.position.nil? && !tea.position.empty?
-                    session["formparam"]["position-#{tea.id}"] = t("val.teachers.otherpleaseselect")
-                    session["formparam"]["otherposition-#{tea.id}"]  = tea.position
+                    flash["formparam"]["position-#{tea.id}"] = t("val.teachers.otherpleaseselect")
+                    flash["formparam"]["otherposition-#{tea.id}"]  = tea.position
                 end
-                session["formparam"]["degree-#{tea.id}"] = tea.degree
-                session["formparam"]["branch-#{tea.id}"] = tea.branch
-                session["formparam"]["university-#{tea.id}"] = tea.university
+                flash["formparam"]["degree-#{tea.id}"] = tea.degree
+                flash["formparam"]["branch-#{tea.id}"] = tea.branch
+                flash["formparam"]["university-#{tea.id}"] = tea.university
                 finduniversity = Tuniversity.where(:title => tea.university)
                 if finduniversity.length == 0 && !tea.university.nil? && !tea.university.empty?
-                    session["formparam"]["university-#{tea.id}"] = t("val.teachers.otherpleaseselect")
-                    session["formparam"]["otheruniversity-#{tea.id}"]  = tea.university
+                    flash["formparam"]["university-#{tea.id}"] = t("val.teachers.otherpleaseselect")
+                    flash["formparam"]["otheruniversity-#{tea.id}"]  = tea.university
                 end
-                session["formparam"]["topic-#{tea.id}"] = tea.topic
+                flash["formparam"]["topic-#{tea.id}"] = tea.topic
                 findothertopic = Ttopic.where(:title => tea.topic)
                 if findothertopic.length == 0 && !tea.topic.nil? && !tea.topic.empty?
-                    session["formparam"]["topic-#{tea.id}"] = t("val.teachers.otherpleaseselect")
-                    session["formparam"]["othertopic-#{tea.id}"]  = tea.topic
+                    flash["formparam"]["topic-#{tea.id}"] = t("val.teachers.otherpleaseselect")
+                    flash["formparam"]["othertopic-#{tea.id}"]  = tea.topic
                 end
-                session["formparam"]["remark-#{tea.id}"] = tea.remark
+                flash["formparam"]["remark-#{tea.id}"] = tea.remark
                 if (!tea.prefix.nil? && !tea.prefix.empty?) || (!tea.name.nil? && !tea.name.empty?) ||
                     (!tea.surname.nil? && !tea.surname.empty?) || (!tea.status.nil? && !tea.status.empty?) ||
                     (!tea.position.nil? && !tea.position.empty?) || (!tea.degree.nil? && !tea.degree.empty?) ||
@@ -72,14 +72,14 @@ class TeacherMusicsController < ApplicationController
                 #session["qid-#{q.id}"] = nil
             end
         end
-        maxteacher = !(session["formparam"]["countteachers"].nil?)?Integer(session["formparam"]["countteachers"]):2 
+        maxteacher = !(flash["formparam"]["countteachers"].nil?)?Integer(flash["formparam"]["countteachers"]):2 
         @formpercent = (anscount/((9.0 * maxteacher) + 1))*100.0
         
         #@answers1 = Answer.where(:musicin_id => @q1.id)
         #@answers1.each do |ans|
-        #    session["formparam"]["titleans-#{ans.id}"] = ans.othertitle
-        #    session["formparam"]["ans-#{ans.id}"] = ans.answer
-        #    session["formparam"]["ans-#{ans.id}-2"] = ans.answer2
+        #    flash["formparam"]["titleans-#{ans.id}"] = ans.othertitle
+        #    flash["formparam"]["ans-#{ans.id}"] = ans.answer
+        #    flash["formparam"]["ans-#{ans.id}-2"] = ans.answer2
         #end
         #@questions.group_by(&:musicin_id)
         deffobj = maxteacher - @teacers.length
@@ -89,9 +89,9 @@ class TeacherMusicsController < ApplicationController
     end
     def show
         @master_case = 0; 
-        session["formparam"]= {}
-        #if session["formparam"].nil? 
-        #    session["formparam"]= {}
+        flash["formparam"]= {}
+        #if flash["formparam"].nil? 
+        #    flash["formparam"]= {}
         #end
                 
         @teastatus = Tstatusjosb.all
@@ -108,7 +108,7 @@ class TeacherMusicsController < ApplicationController
         if !questioncont.nil?
             answer = Answer.where(:question_id=>questioncont.id).where(:school_id=>user.school_id).first
             if !answer.nil?
-                    session["formparam"]["countteachers"] = answer.answer
+                    flash["formparam"]["countteachers"] = answer.answer
                     if !answer.answer.nil? && !answer.answer.empty?
                         anscount = anscount + 1
                     end
@@ -119,31 +119,31 @@ class TeacherMusicsController < ApplicationController
         @teacers = Tanswer.where(:school_id=>user.school_id)
         @teacers.each do |tea|
             if !tea.nil?
-                session["formparam"]["teaprefix-#{tea.id}"] = tea.prefix
-                session["formparam"]["name-#{tea.id}"] = tea.name
-                session["formparam"]["surname-#{tea.id}"] = tea.surname
-                session["formparam"]["status-#{tea.id}"] = tea.status
-                session["formparam"]["position-#{tea.id}"] = tea.position
+                flash["formparam"]["teaprefix-#{tea.id}"] = tea.prefix
+                flash["formparam"]["name-#{tea.id}"] = tea.name
+                flash["formparam"]["surname-#{tea.id}"] = tea.surname
+                flash["formparam"]["status-#{tea.id}"] = tea.status
+                flash["formparam"]["position-#{tea.id}"] = tea.position
                 findotherpos = Tposition.where(:title => tea.position)
                 if findotherpos.length == 0 && !tea.position.nil? && !tea.position.empty?
-                    session["formparam"]["position-#{tea.id}"] = t("val.teachers.otherpleaseselect")
-                    session["formparam"]["otherposition-#{tea.id}"]  = tea.position
+                    flash["formparam"]["position-#{tea.id}"] = t("val.teachers.otherpleaseselect")
+                    flash["formparam"]["otherposition-#{tea.id}"]  = tea.position
                 end
-                session["formparam"]["degree-#{tea.id}"] = tea.degree
-                session["formparam"]["branch-#{tea.id}"] = tea.branch
-                session["formparam"]["university-#{tea.id}"] = tea.university
+                flash["formparam"]["degree-#{tea.id}"] = tea.degree
+                flash["formparam"]["branch-#{tea.id}"] = tea.branch
+                flash["formparam"]["university-#{tea.id}"] = tea.university
                 finduniversity = Tuniversity.where(:title => tea.university)
                 if finduniversity.length == 0 && !tea.university.nil? && !tea.university.empty?
-                    session["formparam"]["university-#{tea.id}"] = t("val.teachers.otherpleaseselect")
-                    session["formparam"]["otheruniversity-#{tea.id}"]  = tea.university
+                    flash["formparam"]["university-#{tea.id}"] = t("val.teachers.otherpleaseselect")
+                    flash["formparam"]["otheruniversity-#{tea.id}"]  = tea.university
                 end
-                session["formparam"]["topic-#{tea.id}"] = tea.topic
+                flash["formparam"]["topic-#{tea.id}"] = tea.topic
                 findothertopic = Ttopic.where(:title => tea.topic)
                 if findothertopic.length == 0 && !tea.topic.nil? && !tea.topic.empty?
-                    session["formparam"]["topic-#{tea.id}"] = t("val.teachers.otherpleaseselect")
-                    session["formparam"]["othertopic-#{tea.id}"]  = tea.topic
+                    flash["formparam"]["topic-#{tea.id}"] = t("val.teachers.otherpleaseselect")
+                    flash["formparam"]["othertopic-#{tea.id}"]  = tea.topic
                 end
-                session["formparam"]["remark-#{tea.id}"] = tea.remark
+                flash["formparam"]["remark-#{tea.id}"] = tea.remark
                 if (!tea.prefix.nil? && !tea.prefix.empty?) || (!tea.name.nil? && !tea.name.empty?) ||
                     (!tea.surname.nil? && !tea.surname.empty?) || (!tea.status.nil? && !tea.status.empty?) ||
                     (!tea.position.nil? && !tea.position.empty?) || (!tea.degree.nil? && !tea.degree.empty?) ||
@@ -154,14 +154,14 @@ class TeacherMusicsController < ApplicationController
                 #session["qid-#{q.id}"] = nil
             end
         end
-        maxteacher = !(session["formparam"]["countteachers"].nil?)?Integer(session["formparam"]["countteachers"]):2 
+        maxteacher = !(flash["formparam"]["countteachers"].nil?)?Integer(flash["formparam"]["countteachers"]):2 
         @formpercent = (anscount/((9.0 * maxteacher) + 1))*100.0
         
         #@answers1 = Answer.where(:musicin_id => @q1.id)
         #@answers1.each do |ans|
-        #    session["formparam"]["titleans-#{ans.id}"] = ans.othertitle
-        #    session["formparam"]["ans-#{ans.id}"] = ans.answer
-        #    session["formparam"]["ans-#{ans.id}-2"] = ans.answer2
+        #    flash["formparam"]["titleans-#{ans.id}"] = ans.othertitle
+        #    flash["formparam"]["ans-#{ans.id}"] = ans.answer
+        #    flash["formparam"]["ans-#{ans.id}-2"] = ans.answer2
         #end
         #@questions.group_by(&:musicin_id)
         deffobj = maxteacher - @teacers.length

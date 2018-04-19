@@ -1,8 +1,13 @@
 class AdminController < ApplicationController
     before_action :authenticate_user!, only: [:index]
-    before_action :is_admin!, only: [:index]
+    #before_action :is_admin!, only: [:index]
     def index
+        @master_case = 99
         
+        @school_count = School.count
+        @school_registed_count  = User.school_registed
+        @user_count = User.user_registed
+        @school_registed_percent  = @school_registed_count.percent_of(@school_count)
     end
     def show
         

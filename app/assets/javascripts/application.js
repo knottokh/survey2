@@ -16,10 +16,11 @@
 //= require popper
 //= require bootstrap-sprockets
 // require bootstrap
-//= require bootstrap-select
+// require bootstrap-select
 // require cocoon
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require select2-full
 //= require_tree .
 
 $(function(){
@@ -49,12 +50,51 @@ $(function(){
         $('html, body').animate({scrollTop : 0},500);
         return false;
     });
-   $("#user_school_id").selectpicker({
-             liveSearch:true
-    })
+    $('#user_school_id').select2({
+          ajax: {
+                url: '/allschools',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        term: params.term,
+                        page: params.page,
+                        page_limit: 50
+                    };
+                },
+                processResults: function(data, page) {
+                    //console.log(data)
+                    return {
+                        results: data.schools
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            },
+            //allowClear: true,
+            //placeholder: "ชื่อสถานศึกษา หรือ รหัสสถานศึกษา*",
+            templateResult: function(school) {
+                if(typeof school.ministry_code !== "undefined" && typeof school.school_name !== "undefined")
+                
+                    return school.ministry_code +" "+ school.school_name
+                
+                return school.school_name || school.ministry_code;
+            },
+            templateSelection: function(school) {
+                
+                if(typeof school.ministry_code !== "undefined" && typeof school.school_name !== "undefined")
+                
+                    return school.ministry_code +" "+ school.school_name
+                
+               return "ชื่อสถานศึกษา หรือ รหัสสถานศึกษา*"
+            }
+        });
       $(".addNewOtherMusic").click(function(){
           $(this).parent().find(".musicOtherSet").append($(this).parent().find(".new_music_form").html())
       })
+    
     
        
 })

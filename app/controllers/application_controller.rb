@@ -137,7 +137,7 @@ class ApplicationController < ActionController::Base
           end
           
           questioncount = questioncount + questions.count;
-          answers = Answer.where(:musictype_id => mus.id)
+          answers = Answer.where("musictype_id = ? and school_id = ?", mus.id,user.school_id)
           answers.each do |ans|
               cursession["titleans-#{ans.id}"] = ans.othertitle
               cursession["ans-#{ans.id}"] = ans.answer

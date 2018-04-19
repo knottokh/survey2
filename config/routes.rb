@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   post '/adminimport' => 'admin#importpost'
   get '/exportto' => 'admin#exportTo'
   
+  get "/allschools" => 'schools#allschools'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -47,16 +48,19 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   
-  resources :answers
-  resources :formmanages
-  resources :loghistories
-  resources :musictypes
-  resources :questions
-  resources :schools
-  resources :sessions
-  resources :tanswers
-  resources :tloghistories
-  resources :users
+  #resources :answers
+  #resources :formmanages
+  #resources :loghistories
+  #resources :musictypes
+  #resources :questions
+  #resources :schools
+  #resources :sessions
+  #resources :tanswers
+  #resources :tloghistories
+  #resources :users
+  resources :schools do
+    post 'filter', on: :collection
+  end
 
   # Example resource route with options:
   #   resources :products do
