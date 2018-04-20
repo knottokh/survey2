@@ -44,6 +44,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    ajax-datatables-rails (0.4.0)
+      railties (>= 4.0)
     arel (8.0.0)
     autoprefixer-rails (8.3.0)
       execjs
@@ -93,6 +95,11 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    jquery-datatables-rails (3.4.0)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
+      sass-rails
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -225,6 +232,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store (~> 1.1.1)
+  ajax-datatables-rails
   bootstrap (~> 4.0.0)
   bootstrap-select-rails (~> 1.12, >= 1.12.4)
   byebug
@@ -235,6 +243,7 @@ DEPENDENCIES
   font-awesome-rails
   iconv (~> 1.0)
   jbuilder (~> 2.5)
+  jquery-datatables-rails
   jquery-rails (~> 4.3.1)
   kaminari (~> 1.1.1)
   popper_js (~> 1.12.9)

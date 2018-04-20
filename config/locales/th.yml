@@ -113,6 +113,23 @@ th:
         form2head: "เครื่องดนตรีไทย"
         form3head: "เครื่องดนตรีสากลและดุริยางค์"
         form4head: "เครื่องดนตรีพื้นบ้าน"
+    schools:
+        school_code: "รหัสโรงเรียน"
+        education_area: "ชื่อเขตพื้นที่การศึกษา"
+        ministry_code: "รหัสกระทรวง"
+        school_name: "ชื่อโรงเรียน"
+        municipal_area: "เขตเทศบาล"
+        district: "อำเภอ"
+        province: "จังหวัด"
+        postcode: "รหัสไปรษณีย์"
+        zone: "ภาค"
+        students_count: "จำนวนนักเรียน"
+        percent_all: "ภาพรวม"
+        percent_1: "ครูดนตรี"
+        percent_2: "ดนตรีไทย"
+        percent_3: "ดนตรีสากล"
+        percent_4: "ดนตรีพื้นบ้าน"
+        userinscool: "สมาชิก"
   activerecord:
     attributes:
       user:

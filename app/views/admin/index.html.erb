@@ -37,7 +37,7 @@
                 <div class="col text-center">
                      <div class="active-border">
                           <div class="circle">
-                               <span class="prec-box"><span class="prec"><%= format('%.2f',70)%></span><span>%</span></span>
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',@formall_success_percent)%></span><span>%</span></span>
                            </div>
                      </div>
                      <p><%= t('val.admins.insertsucess')%></p>
@@ -49,7 +49,7 @@
                  <div class="col-12 col-sm-6 text-center">
                      <div class="active-border active-border-sm">
                           <div class="circle">
-                               <span class="prec-box"><span class="prec"><%= format('%.2f',20)%></span><span>%</span></span>
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',@form1_success_percent)%></span><span>%</span></span>
                            </div>
                      </div>
                      <p><%= t('val.admins.form1head')%></p>
@@ -57,7 +57,7 @@
                  <div class="col-12 col-sm-6 text-center">
                      <div class="active-border active-border-sm">
                           <div class="circle">
-                               <span class="prec-box"><span class="prec"><%= format('%.2f',50)%></span><span>%</span></span>
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',@form2_success_percent)%></span><span>%</span></span>
                            </div>
                      </div>
                      <p><%= t('val.admins.form2head')%></p>
@@ -65,7 +65,7 @@
                  <div class="col-12 col-sm-6 text-center">
                      <div class="active-border active-border-sm">
                           <div class="circle">
-                               <span class="prec-box"><span class="prec"><%= format('%.2f',85)%></span><span>%</span></span>
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',@form3_success_percent)%></span><span>%</span></span>
                            </div>
                      </div>
                      <p><%= t('val.admins.form3head')%></p>
@@ -73,12 +73,32 @@
                  <div class="col-12 col-sm-6 text-center">
                      <div class="active-border active-border-sm">
                           <div class="circle">
-                               <span class="prec-box"><span class="prec"><%= format('%.2f',100)%></span><span>%</span></span>
+                               <span class="prec-box"><span class="prec"><%= format('%.2f',@form4_success_percent)%></span><span>%</span></span>
                            </div>
                      </div>
                      <p><%= t('val.admins.form4head')%></p>
                  </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table id="schools-table", data-source="<%= schools_path(format: :json) %>">
+              <thead>
+                <tr>
+                  <th><%= t('val.schools.school_code') %></th>
+                  <th><%= t('val.schools.school_name') %></th>
+                  <th><%= t('val.schools.percent_all') %></th>
+                  <th><%= t('val.schools.percent_1') %></th>
+                  <th><%= t('val.schools.percent_2') %></th>
+                  <th><%= t('val.schools.percent_3') %></th>
+                  <th><%= t('val.schools.percent_4') %></th>
+                  <th><%= t('val.schools.userinscool') %></th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
         </div>
     </div>
 </div>

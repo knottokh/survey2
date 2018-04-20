@@ -9,32 +9,32 @@
                <div class="notice">
                   <div class="form-group row">
                       <div class="col-sm-4">
-                         <%= f.input :prefix , required: true,:label => false,input_html: {class: "form-control" },placeholder: "#{t('val.users.prefix')}*", validate: true%>
+                         <%= f.input :prefix , required: true,:label => false,input_html: {class: "form-control" },hint: "#{t('val.users.prefix')}*",placeholder: "#{t('val.users.prefix')}*"%>
                       </div>
                       <div class="col-sm-8">
-                          <%= f.input :name ,:label => false ,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.name')}*"%>
+                          <%= f.input :name ,:label => false ,input_html: {class: "form-control" },hint: "#{t('val.users.name')}*" ,placeholder: "#{t('val.users.name')}*"%>
                       </div>
                   </div>
                   <div class="form-group">
-                       <%= f.input :surname ,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.surname')}*"%>
+                       <%= f.input :surname ,:label => false,input_html: {class: "form-control" } ,hint: "#{t('val.users.surname')}*",placeholder: "#{t('val.users.surname')}*"%>
                   </div>
                   <div class="form-group">
-                       <%= f.input :cardnumber,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.cardnumber')}*"%>
+                       <%= f.input :cardnumber,:label => false,input_html: {class: "form-control" },hint: "#{t('val.users.cardnumber')}*" ,placeholder: "#{t('val.users.cardnumber')}*"%>
                   </div>
                   <div class="form-group">
-                       <%= f.input :position,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.position')}*"%>
+                       <%= f.input :position,:label => false,input_html: {class: "form-control" },hint: "#{t('val.users.position')}*" ,placeholder: "#{t('val.users.position')}*"%>
                   </div>
                   <div class="form-group">
-                       <%= f.input :phone,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.phone')}*"%>
+                       <%= f.input :phone,:label => false,input_html: {class: "form-control" },hint: "#{t('val.users.phone')}*" ,placeholder: "#{t('val.users.phone')}*"%>
                   </div>
                   <div class="form-group">
-                       <%= f.input :email,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.email')}*"%>
+                       <%= f.input :email,:label => false,input_html: {class: "form-control" } ,hint: "#{t('val.users.email')}*",placeholder: "#{t('val.users.email')}*"%>
                   </div>
                 </div>  
                 <div class="notice notice-info">
                       <p class="h4"><%= t('val.addsignuserandpass') %></p>
                       <div class="form-group">
-                         <%= f.input :username,:label => false ,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.username')}*"%>
+                         <%= f.input :username,:label => false ,input_html: {class: "form-control" } ,hint: "#{t('val.users.username')}*",placeholder: "#{t('val.users.username')}*"%>
                       </div>
                       <div class="form-group">
                           <%= f.input :password, autocomplete: "off",:label => false, hint: "leave it blank if you don't want to change it",input_html: {class: "form-control" } ,placeholder: "#{t('val.users.password')}", required: false %>

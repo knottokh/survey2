@@ -73,3 +73,7 @@ gem 'activerecord-session_store', '~> 1.1.1' #need install
 #import excel
 gem 'roo', '~> 2.7'
 gem 'iconv', '~> 1.0'
+
+#datatable
+gem 'jquery-datatables-rails'
+gem 'ajax-datatables-rails'

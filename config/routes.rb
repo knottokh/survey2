@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get '/exportto' => 'admin#exportTo'
   
   get "/allschools" => 'schools#allschools'
+  resources :schools , only: [:index]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -58,9 +59,9 @@ Rails.application.routes.draw do
   #resources :tanswers
   #resources :tloghistories
   #resources :users
-  resources :schools do
-    post 'filter', on: :collection
-  end
+  #resources :schools do
+  #  post 'filter', on: :collection
+  #end
 
   # Example resource route with options:
   #   resources :products do

@@ -1,13 +1,24 @@
 class AdminController < ApplicationController
-    before_action :authenticate_user!, only: [:index]
+    #before_action :authenticate_user!, only: [:index]
     #before_action :is_admin!, only: [:index]
     def index
         @master_case = 99
         
-        @school_count = School.count
+        school_count = School.count
         @school_registed_count  = User.school_registed
         @user_count = User.user_registed
-        @school_registed_percent  = @school_registed_count.percent_of(@school_count)
+        formall_success  = School.schoolpercent.group("id").having("percent_all = 100").map {|i| i.id }.count
+        form1_success  = School.schoolpercent.group("id").having("percent_1 = 100").map {|i| i.id }.count
+        form2_success  = School.schoolpercent.group("id").having("percent_2 = 100").map {|i| i.id }.count
+        form3_success  = School.schoolpercent.group("id").having("percent_3 = 100").map {|i| i.id }.count
+        form4_success  = School.schoolpercent.group("id").having("percent_4 = 100").map {|i| i.id }.count
+        @school_registed_percent  = @school_registed_count.percent_of(school_count)
+        @formall_success_percent  = formall_success.percent_of(school_count)
+        @form1_success_percent  = form1_success.percent_of(school_count)
+        @form2_success_percent  = form2_success.percent_of(school_count)
+        @form3_success_percent  = form3_success.percent_of(school_count)
+        @form4_success_percent  = form4_success.percent_of(school_count)
+        
     end
     def show
         
