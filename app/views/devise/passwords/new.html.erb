@@ -1,19 +1,19 @@
-<h1 class="big-header text-info"><%= t('val.headforgetpassword') %></h1>
+<h1 class="big-header text-primary"><%= t('val.headforgetpassword') %></h1>
 
 <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post },validate: true) do |f| %>
   <%= f.error_notification %>
  <div class="card border-0 col-md-7">
     <div class="card-body">
         <div class="form-inputs">
-          <%= f.input :email, required: true,label: false, autofocus: true ,placeholder: t('val.users.email')%>
+          <%= f.input :email, required: true,label: false, autofocus: true ,placeholder: t('val.users.email'),hint: t("val.resetemialhint")%>
         </div>
       
         <div class="form-actions row">
           <div class="col">
-             <%= link_to t('val.banktodashboard'), dashboard_path, method: :get ,class: "btn btn-danger btn-lg fox-shadow--8dp"%> 
+             <%= link_to t('val.backtosignin'), dashboard_path, method: :get ,class: "btn btn-primary btn-lg fox-shadow--8dp"%> 
           </div>  
           <div class="col">
-            <%= f.button :submit, t('val.sendmailchnagepass') , class:  "btn btn-success  btn-lg form-control  box-shadow--8dp" %>
+            <%= f.button :submit, t('val.sendmailchnagepass') , class:  "btn btn-pink  btn-lg form-control  box-shadow--8dp" %>
           </div>
         </div>
     </div>    

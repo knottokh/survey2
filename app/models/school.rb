@@ -7,7 +7,8 @@ class School < ApplicationRecord
   has_many :loghistories 
   has_many :tloghistories 
   has_many :formmanages 
-    def self.schoolpercent
+  
+  def self.schoolpercentold
         select("*,	(
                                 (    (
                                       (select (sum (m) + 1) mms from ( select (
@@ -28,7 +29,7 @@ class School < ApplicationRecord
                                      
                                         select SUM(a.answer)
                                             from answers a INNER JOIN questions q on a.question_id = q.id 
-                                           where  a.school_id = schools.id and  a.question_id = #{q1max} 
+                                           where  a.school_id = schools.id and  a.question_id = #{q1id} 
                                       
                                       ) * 9.00 +1)
                                       ) * 100
@@ -99,7 +100,7 @@ class School < ApplicationRecord
                                      
                                             select SUM(a.answer)
                                                 from answers a INNER JOIN questions q on a.question_id = q.id 
-                                               where  a.school_id = schools.id and  a.question_id = #{q1max} 
+                                               where  a.school_id = schools.id and  a.question_id = #{q1id} 
                                           
                                           ) * 9.00 +1)
                                           +
@@ -107,9 +108,11 @@ class School < ApplicationRecord
                                        ) * 100
                                      ) percent_all,(Select count(users.id) from users where users.school_id = schools.id) userinscool")
     end
-  
+    def self.schoolpercent
+        select("*,(Select count(users.id) from users where users.school_id = schools.id) userinscool")
+    end
     private 
-    def self.q1max
+    def self.q1id
       Question.joins(:musictype).where(:musictypes => {formtype:1}).last.id
     end
     def self.q2max

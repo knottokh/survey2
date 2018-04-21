@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
-    #before_action :authenticate_user!, only: [:index]
-    #before_action :is_admin!, only: [:index]
+    before_action :authenticate_user!, only: [:index]
+    before_action :is_admin!, only: [:index]
     def index
         @master_case = 99
         
@@ -36,7 +36,7 @@ class AdminController < ApplicationController
         end
     end
   def import
-   
+       @anser1 = sum_all_teacher_by_school(1)#select_music_school(1,'(2,3,4)','IN')
   end
   def importpost
       tablecol = nil
@@ -56,5 +56,14 @@ class AdminController < ApplicationController
           flash[:importmsg] = ["Can't Import"]
       end
       render action: :import
+  end
+  def getuserinfo
+      alluser = User.user_findbyschool(params[:schoolid])
+      respond_to do |format|  
+            format.html
+            format.json { 
+              render :json => { :users =>  alluser ,:schoolid => params[:schoolid]} 
+          }
+      end
   end
 end

@@ -21,15 +21,11 @@ class TeacherMusicsController < ApplicationController
         questioncont =  Question.find_by({:title => "teachercount"})
         
                         #.page(params[:page])
-        anscount  = 0
-        
+
         if !questioncont.nil?
             answer = Answer.where(:question_id=>questioncont.id).where(:school_id=>user.school_id).first
             if !answer.nil?
                     flash["formparam"]["countteachers"] = answer.answer
-                    if !answer.answer.nil? && !answer.answer.empty?
-                        anscount = anscount + 1
-                    end
                     #session["qid-#{q.id}"] = nil
             end
         end
@@ -62,18 +58,11 @@ class TeacherMusicsController < ApplicationController
                     flash["formparam"]["othertopic-#{tea.id}"]  = tea.topic
                 end
                 flash["formparam"]["remark-#{tea.id}"] = tea.remark
-                if (!tea.prefix.nil? && !tea.prefix.empty?) || (!tea.name.nil? && !tea.name.empty?) ||
-                    (!tea.surname.nil? && !tea.surname.empty?) || (!tea.status.nil? && !tea.status.empty?) ||
-                    (!tea.position.nil? && !tea.position.empty?) || (!tea.degree.nil? && !tea.degree.empty?) ||
-                    (!tea.branch.nil? && !tea.branch.empty?) || (!tea.university.nil? && !tea.university.empty?) ||
-                    (!tea.topic.nil? && !tea.topic.empty?)
-                    anscount = anscount + 1
-                end
                 #session["qid-#{q.id}"] = nil
             end
         end
         maxteacher = !(flash["formparam"]["countteachers"].nil?)?Integer(flash["formparam"]["countteachers"]):2 
-        @formpercent = (anscount/((9.0 * maxteacher) + 1))*100.0
+        @formpercent = current_user.school.percent_1 
         
         #@answers1 = Answer.where(:musicin_id => @q1.id)
         #@answers1.each do |ans|
@@ -175,6 +164,7 @@ class TeacherMusicsController < ApplicationController
         track = Array.new 
         #track.push(params[:qparam])
         #add answer all
+        updateschool = false
         params[:qparam].each do |k, v|
             karr = k.split('-') 
             case karr[0]
@@ -185,7 +175,8 @@ class TeacherMusicsController < ApplicationController
                          if !questioncont.nil?
                             answer = Answer.where(:question_id=> questioncont.id).where(:school_id=>user.school_id).first
                              if answer.nil?
-                                          behavior = 4;
+                                          behavior = 4
+                                          updateschool= true
                                           #new data
                                           #tracharr.push("new case")
                                           ans = Answer.new({answer:v,question_id:questioncont.id,school_id:user.school_id});
@@ -200,6 +191,7 @@ class TeacherMusicsController < ApplicationController
                                          #tracharr.push("update case")
                                           if answer.answer != v
                                              behavior = 5;
+                                             updateschool= true
                                               answer.update({answer:v});
                                               if answer.save
                                                    track.push("update success")
@@ -240,7 +232,8 @@ class TeacherMusicsController < ApplicationController
                     behavior = 0;  
                         if !teacher.nil?
                             if teacher.prefix != tprefix || teacher.name != tname || teacher.surname != tsurname || teacher.status != tstatus || teacher.position != tposition || teacher.degree != tdegree || teacher.branch != tbranch || teacher.university != tuniversity || teacher.topic != ttopic || teacher.remark != tremark
-                                 behavior = 5;
+                                 behavior = 5
+                                 updateschool= true
                                   teacher.update({
                                             prefix:tprefix,
                                             name:tname,
@@ -345,7 +338,10 @@ class TeacherMusicsController < ApplicationController
                 end    
             end
         end
-        #add teacher info
+        #add update school percent
+        if updateschool
+            update_school_percent(user.school_id,1)
+        end
         
         
         flash[:question_errors] = track

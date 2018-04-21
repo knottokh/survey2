@@ -5,7 +5,9 @@ class User < ApplicationRecord
   scope :user_registed, -> {
      where.not(school_id: nil).where(role: "user").count
   }  
-  
+  scope :user_findbyschool ,-> (school_id){
+     where(school_id: school_id).where(role: "user")
+  }  
   attr_accessor :login
   
   validates :username,length: {minimum: 5}, uniqueness: true

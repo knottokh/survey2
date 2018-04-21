@@ -1,4 +1,4 @@
- <div class="container">
+ <div class="container admin">
     <div class="row notice">
           <div class="col">
               <h1>Admin’s DASHBOARD</h1>
@@ -7,6 +7,12 @@
                <%= link_to t('val.signout'), destroy_user_session_path, method: "delete" ,class: "btn btn-danger"%>
          </div>
     </div> 
+     <% if notice %>
+               <p class="notice-alert notice"><%= notice %></p>
+              <% end %>
+              <% if alert %>
+               <p class="notice-alert alert"><%= alert %></p>
+              <% end %>
     <div class="row pt-2">
         <div class="col-12 col-sm-6 col-md-4">
             <div class="row">
@@ -81,6 +87,7 @@
             </div>
         </div>
     </div>
+     <hr class="my-4">
     <div class="row">
         <div class="col">
             <table id="schools-table", data-source="<%= schools_path(format: :json) %>">
@@ -99,6 +106,22 @@
               <tbody>
               </tbody>
             </table>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                      </div>
+                    </div>
+                  </div>
+                </div>
         </div>
     </div>
 </div>

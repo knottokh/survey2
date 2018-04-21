@@ -39,10 +39,10 @@ $(function(){
     $(window).scroll(function(){
         if ($(this).scrollTop() > 400) {
             $(".scrollToTop").fadeIn(1000);
-            $(".from-save-fix").addClass("save-fixed")
+            $(".btn-scoll-fixed").addClass("btn-fixed")
         } else {
             $(".scrollToTop").fadeOut(1000);
-            $(".from-save-fix").removeClass("save-fixed")
+            $(".btn-scoll-fixed").removeClass("btn-fixed")
         }
     });
 
@@ -96,7 +96,6 @@ $(function(){
           $(this).parent().find(".musicOtherSet").append($(this).parent().find(".new_music_form").html())
       })
     
-    
        
 })
 function setOtherShowHide(val,elm){
@@ -123,16 +122,16 @@ function showdegree(elm,i){
     if (i<=180){
 	    //f4f2f2
         elm.css('background-image','linear-gradient(' + (90+i) + 'deg, transparent 50%, #f4f2f2 50%),linear-gradient(90deg, #f4f2f2 50%, transparent 50%)');
-        elm.css('background-color','#dc3545')
+        elm.css('background-color','#EE220C')
     }
     else if (i > 180 && i<=306){
         elm.css('background-image','linear-gradient(' + (i-90) + 'deg, transparent 50%, #fd7e14 50%),linear-gradient(90deg, #f4f2f2 50%, transparent 50%)');
-        elm.css('background-color','#fd7e14')
+        elm.css('background-color','#FF9300')
         
     }
     else if (i === 360){
         elm.css('background-image','linear-gradient(' + (i-90) + 'deg, transparent 50%, #28a745 50%),linear-gradient(90deg, #f4f2f2 50%, transparent 50%)');
-        elm.css('background-color','#28a745')
+        elm.css('background-color','#1DB100')
         
     }
     else{

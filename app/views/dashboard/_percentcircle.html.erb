@@ -1,0 +1,16 @@
+<div class="form-group col-md-12 col-lg-6">
+                        <div class="block-text">
+                        <%= link_to  link_path, method: "get",class: "a-removeunderline" do%>   
+                            <div class="active-border">
+                                <div class="circle">
+                                    <span class="prec-box"><span class="prec"><%= format('%.2f',percent)%></span><span>%</span></span>
+                                </div>
+                            </div>
+                        <%end%> 
+                        <p><%= headtext %></p>
+                        <%= link_to link_view_path, method: "get" ,class: "goto-formpage",title: "view" do %>
+                                <%=fa_icon "eye"%>
+                                <span class="view-eye-hint">view</span>
+                            <% end %>
+                        </div>
+</div>

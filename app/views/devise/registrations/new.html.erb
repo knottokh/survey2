@@ -1,4 +1,4 @@
-<h1 class="big-header text-info"><%= t('val.headersignup') %></h1>
+<h1 class="big-header text-primary"><%= t('val.headersignup') %></h1>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name),html: {class: "" ,error_class: "error"}, validate: true) do |f| %>
         <%= f.error_notification %>
         <div class="card-group">
@@ -9,25 +9,25 @@
                   </div>
                   <div class="form-group">
                      <h5 class="text-danger"><%= t('val.privatehead') %></h5>
-                      <p class="text-info"><%= t('val.private1')%></p>
-                      <p class="text-info">
+                      <h6 class="text-info"><%= t('val.private1')%></h6>
+                      <h6 class="text-info">
                           <span><%= t('val.private21')%></span>
                           <u class="text-danger"><%= t('val.private221')%></u>
                           <u class="text-danger"><%= t('val.private222')%></u>
                           <span><%= t('val.private23')%></span>
                           <u class="text-danger"><%= t('val.private24')%></u>
                           <span><%= t('val.private25')%></span>
-                      </p>
+                      </h6>
                   </div>
               </div>
               <div class="card-footer border-0 bg-white">
-                  <div class="col">
-                          <%= link_to t('val.backtosignin'), new_user_session_path, method: "get" ,class: "btn btn-danger btn-lg fox-shadow--8dp"%> 
+                  <div class="col-md-8 col-lg-6">
+                          <%= link_to t('val.backtosignin'), new_user_session_path, method: "get" ,class: "btn btn-primary btn-lg box-shadow--8dp form-control"%> 
                   </div>
               </div>
             </div>
             <div class="card border-0 ">
-              <div class="card-body">
+              <div class="card-body border-l-2">
                   <div class="form-group row">
                       <div class="col-sm-4">
                          <%= f.input :prefix , required: true,:label => false,input_html: {class: "form-control" },placeholder: "#{t('val.users.prefix')}*", validate: true%>
@@ -65,7 +65,7 @@
                    </div>  
               </div>
               <div class="card-footer border-0 bg-white">
-                   <%= f.button :submit, t('val.signupconfirm') , class:  "btn btn-success  btn-lg form-control  box-shadow--8dp" %>
+                   <%= f.button :submit, t('val.signupconfirm') , class:  "btn btn-pink  btn-lg form-control  box-shadow--8dp" %>
               </div>
             </div>
          </div>    

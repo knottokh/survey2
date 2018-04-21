@@ -50,3 +50,4 @@
 #Musictype.create(title:"ภาคอีสาน (เหนือ)",formtype:4)
 #Musictype.create(title:"ภาคอีสาน (ใต้)",formtype:4)
 #Musictype.create(title:"ภาคใต้",formtype:4)
+#User.create(email:"merm.cu@gmail.com",username:"admin",password:"admin11111",role:"admin")

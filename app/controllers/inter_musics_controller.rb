@@ -8,8 +8,8 @@ class InterMusicsController < ApplicationController
         #end
         formdata = getMusicFormInfo(3,flash["formparam"])
         @formarray = formdata["alldata"]
-        @formpercent = formdata["percent"]
-        @musicclass = classMusicNotice
+        @formpercent = current_user.school.percent_3
+        @musicclass = classMusicNotice2
         #@questions.group_by(&:musicin_id)
     end
     def show
@@ -19,15 +19,15 @@ class InterMusicsController < ApplicationController
         #end
         formdata = getMusicFormInfo(3,flash["formparam"])
         @formarray = formdata["alldata"]
-        @formpercent = formdata["percent"]
-        @musicclass = classMusicNotice
+        @formpercent = current_user.school.percent_3
+        @musicclass = classMusicNotice2
         #@questions.group_by(&:musicin_id)
     end
     
     #Post
   def create
       #qustions = Question.all
-      saveandupdateMusics(params[:qparam])
+      saveandupdateMusics(params[:qparam],3)
       
       #flash[:question_errors] = track
       redirect_to intermusic_path

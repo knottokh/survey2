@@ -3,7 +3,7 @@
 @import "font-awesome";
 @import "select2";
 @import "dataTables/jquery.dataTables";
-
+@import "admin";
 @font-face {
     font-family: 'Quark';
     src: url('/assets/subset-Quark-Light.eot');
@@ -86,17 +86,19 @@ body{
 .borderless td, .borderless th,.borderless tbody {
     border: 0!important;
 }
-.save-fixed{
+.btn-fixed{
     position:fixed;
     top:2rem;
-    right:0;
+    z-index:1;
     padding: 2rem 3rem;
-    border-left: 6px solid #7f7f84;
+    border-left: 6px solid #7f7f84!important;
     margin-bottom: 10px;
     -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
        -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
             box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
 }
+.fixed-right{    right:0;}
+.fixed-left{left:0;}
 
 /**Circle Percent**/
 .prec-box{
@@ -166,7 +168,7 @@ body{
     width: 50px;
     height: 300px;
     margin:0 auto;
-    background: linear-gradient(#28a745, #ffc107 ,#fd7e14,#dc3545);
+    background: linear-gradient(#1DB100, #ffc107 ,#FF9300,#EE220C);
 }
 .a-removeunderline{
     display:table;
@@ -177,62 +179,18 @@ body{
 }
 
 .has-error{
-    .help-block{color:#dc3545}
+    span.help-block{color:#dc3545}
     input,select,span.select2{border:1px solid #dc3545}
 }
 p.help-block{color:#45ABCD}
 .error{
     color: #d73814;
 }
-
-.notice {
-    padding: 15px;
-    background-color: #fafafa;
-    border-left: 6px solid #7f7f84;
-    margin-bottom: 10px;
-    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-       -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-            box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-}
-.notice-sm {
-    padding: 10px;
-    font-size: 80%;
-}
-.notice-lg {
-    padding: 35px;
-    font-size: large;
-}
-.notice-success {
-    border-color: #80D651;
-}
-.notice-success {
-    strong {
-        color: #80D651;
-    }
-}
-.notice-info {
-    border-color: #45ABCD;
-}
-.notice-info {
-    strong {
-        color: #45ABCD;
-    }
-}
-.notice-warning {
-    border-color: #FEAF20;
-}
-.notice-warning {
-    strong {
-        color: #FEAF20;
-    }
-}
-.notice-danger {
-    border-color: #d73814;
-}
-.notice-danger {
-    strong {
-        color: #d73814;
-    }
+.view-eye-hint{
+    font-size: 10px;
+    position: absolute;
+    bottom: 3px;
+    left: 11px;
 }
 
 .container-insert{
@@ -272,7 +230,17 @@ p.help-block{color:#45ABCD}
     .goto-formpage{
         position:absolute;
         top:0;
-        right:0;
+        right:1rem;
+        background-color:#efefef;
+        padding:0.5rem;
+        border-radius:50%;
+        color:#000;
+        width:40px;
+        height:40px;
+        &:hover{
+            background-color:#b0c9ec;
+            color:#fff;
+        }
     }
 }
 .important-display{
@@ -283,3 +251,4 @@ p.help-block{color:#45ABCD}
 .select2-selection{
     border:0!important;
 }
+@import "theme";

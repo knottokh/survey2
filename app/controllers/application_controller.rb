@@ -154,8 +154,11 @@ class ApplicationController < ActionController::Base
         
        return returnobject  
     end
-    def classMusicNotice
-        return Array.new(["info","success","warning","danger"])
+    def classMusicNotice1
+        return Array.new(["info","light-green","warning","orose"])
+    end
+    def classMusicNotice2
+        return Array.new(["info","green","light-green","orose","warning"])
     end
     
   def checktext(percent)
@@ -168,13 +171,14 @@ class ApplicationController < ActionController::Base
      end
           
   end    
-  def saveandupdateMusics(qparam)
+  def saveandupdateMusics(qparam,formtype)
       user = current_user
       error_count = 0;
       track = Array.new 
       track.push(qparam)
       #@pages = Pages.new(params[:qparam])
       #tracharr.push(@pages)
+      updateschool = false
       qparam.each do |k, v|
         #v['contact_ids'] = [ v['contact_ids'] ] unless v['contact_ids'].is_a?(Array)
         if !v.nil?
@@ -187,7 +191,8 @@ class ApplicationController < ActionController::Base
                         behavior = 0;
                         answer = Answer.where(:question_id=>qid).where(:school_id=>user.school_id).first
                         if answer.nil?
-                              behavior = 4;
+                              behavior = 4
+                              updateschool= true
                               #new data
                               #tracharr.push("new case")
                               ans = Answer.new({answer:v,answer2:v2,question_id:qid,school_id:user.school_id});
@@ -201,8 +206,9 @@ class ApplicationController < ActionController::Base
                             #update data
                              #tracharr.push("update case")
                               if answer.answer != v || answer.answer2 != v2 
-                                 behavior = 5;
-                                  answer.update({answer:v,answer2:v2});
+                                 behavior = 5
+                                 updateschool= true
+                                  answer.update({answer:v,answer2:v2})
                                   if answer.save
                                        track.push("update success")
                                   else
@@ -228,7 +234,7 @@ class ApplicationController < ActionController::Base
                     objv.each_with_index do |vd,index|
                          behavior = 0;    
                          if !vd.nil? && !vd.empty?
-                             behavior = 4;
+                             behavior = 4
                               #new data
                               #tracharr.push("new case")
                               ans = Answer.new({answer:objans1[index],answer2:objans2[index],othertitle:vd,musictype_id:musid,school_id:user.school_id});
@@ -250,10 +256,10 @@ class ApplicationController < ActionController::Base
                         anstext= qparam["ans-#{ansid}"]
                         anstext2 =qparam["ans-#{ansid}-2"]
                         answer = Answer.find_by(id: ansid)
-                        behavior = 0;  
+                        behavior = 0  
                         if !answer.nil?
                             if answer.answer != anstext || answer.answer2 != anstext2 || answer.othertitle != v 
-                                 behavior = 5;
+                                 behavior = 5
                                   answer.update({othertitle:v,answer:anstext,answer2:anstext2});
                                   if answer.save
                                        track.push("update success")
@@ -273,6 +279,67 @@ class ApplicationController < ActionController::Base
                
         end
       end
+      #add update school percent
+        if updateschool
+            update_school_percent(user.school_id,formtype)
+        end
+  end
+  def get_question_id_formtype1
+      Question.joins(:musictype).where(:musictypes => {formtype:1}).last.id
+  end
+  def get_max_question_count(form_type)
+      Question.joins(:musictype).where(:musictypes => {formtype:form_type}).count * 2.00  
+  end
+  def sum_all_teacher_by_school(school_id)
+      Answer.where(school_id: school_id,question_id: get_question_id_formtype1).sum("answer").to_i * 9.00 + 1
+  end 
+  def select_form1_answer(school_id)
+     ans  = Answer.where(:question_id => get_question_id_formtype1).where(:school_id => school_id).first
+     if !ans.nil?
+         return 1
+     else
+         return 0
+     end     
+  end
+  def select_form1_school(school_id)
+        wherecase = "school_id = #{school_id}"
+        Tanswer.select("((CASE WHEN (prefix IS NOT NULL AND prefix <> '' ) THEN 1 ELSE 0 END)
+                                        + (CASE WHEN (name IS NOT NULL AND name <> '') THEN 1 ELSE 0 END)
+                                        + (CASE WHEN (surname IS NOT NULL AND surname <> '') THEN 1 ELSE 0 END)
+                                        + (CASE WHEN (status IS NOT NULL AND status <> '')  THEN 1 ELSE 0 END)
+                                        + (CASE WHEN (position IS NOT NULL AND position <> '') THEN 1 ELSE 0 END)
+                                        + (CASE WHEN (degree IS NOT NULL  AND degree <> '') THEN 1 ELSE 0 END)
+                                        + (CASE WHEN (branch IS NOT NULL AND branch <> '') THEN 1 ELSE 0 END)
+                                        + (CASE WHEN (university IS NOT NULL AND university <> '') THEN 1 ELSE 0 END)
+                                        + (CASE WHEN (topic IS NOT NULL  AND topic <> '') THEN 1 ELSE 0 END) ) m
+                                      ").where(wherecase).map {|i| i.m }[0].to_f
+  end
+  def select_music_school(school_id,wherevalue,operate='=')
+        wherecase = "answers.school_id = #{school_id} and musictypes.formtype #{operate} #{wherevalue}"
+        Answer.joins("INNER JOIN questions on answers.question_id = questions.id  INNER JOIN musictypes on questions.musictype_id = musictypes.id ")
+                .select("(((CASE WHEN  (answers.answer IS NOT NULL AND answers.answer <> '' ) THEN 1 ELSE 0 END)
+                             + (CASE WHEN (answers.answer2 IS NOT NULL  AND answers.answer2 <> '') THEN 1 ELSE 0 END)) 
+                         ) m
+                       ").where(wherecase).map {|i| i.m.to_f }.inject(0){|sum,x| sum + x }#.where("school_id = 1").map {|i| i.m }[0].to_f
+  end
+  def update_school_percent(school_id,formtype)
+      answer_form_1 = select_form1_school(school_id) + select_form1_answer(school_id)
+      answer_sum_all = answer_form_1 + select_music_school(school_id,'(2,3,4)','IN')
+      
+      question_sum_all = sum_all_teacher_by_school(school_id)+ get_max_question_count(2) + get_max_question_count(3) + get_max_question_count(4)
+      param = {}
+      param["percent_all"] = answer_sum_all.percent_of(question_sum_all)
+      case formtype
+        when 1 
+            
+            param["percent_#{formtype}"] = answer_form_1.percent_of(sum_all_teacher_by_school(school_id))
+        when 2 , 3, 4 
+            param["percent_#{formtype}"] = select_music_school(school_id,formtype).percent_of(get_max_question_count(formtype))
+      end
+      schoolupdate = School.find(school_id)
+      schoolupdate.update(param);
+      schoolupdate.save
+
   end
   def deleteMusic(id)
       delans = Answer.find(id)
@@ -280,7 +347,6 @@ class ApplicationController < ActionController::Base
       loghistory({behavior:6,answer:delans.answer,answer2:delans.answer2,othertitle:delans.othertitle,musictype_id:delans.musictype_id,user_id:current_user.id},track)
       delans.destroy
   end
-
   def loghistory(param,track)
         #1 sign up
         #2 log in
