@@ -46,7 +46,7 @@
                        <%= f.input :position,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.position')}*"%>
                   </div>
                   <div class="form-group">
-                       <%= f.input :phone,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.phone')}*"%>
+                       <%= f.input :phone,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.phone')}*" ,hint: t('val.users.phonehint')%>
                   </div>
                   <div class="form-group">
                        <%= f.input :email,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('val.users.email')}*"%>

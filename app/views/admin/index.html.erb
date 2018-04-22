@@ -89,6 +89,11 @@
     </div>
      <hr class="my-4">
     <div class="row">
+        <div class="form-group col-12">
+            <%= link_to exportschool_path(format: 'csv') ,class: "btn btn-primary" do %>
+                <%=fa_icon "file-alt"%> Export CSV
+            <% end %>
+        </div>
         <div class="col">
             <table id="schools-table", data-source="<%= schools_path(format: :json) %>">
               <thead>

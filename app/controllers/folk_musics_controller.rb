@@ -8,7 +8,7 @@ class FolkMusicsController < ApplicationController
         #end
         formdata = getMusicFormInfo(4,flash["formparam"])
         @formarray = formdata["alldata"]
-        @formpercent = current_user.school.percent_4
+        @formpercent = !current_user.school.percent_4.nil?? current_user.school.percent_4 : 0 
         @musicclass = classMusicNotice2
         #@questions.group_by(&:musicin_id)
     end
@@ -19,7 +19,7 @@ class FolkMusicsController < ApplicationController
         #end
         formdata = getMusicFormInfo(4,flash["formparam"])
         @formarray = formdata["alldata"]
-        @formpercent = current_user.school.percent_4
+        @formpercent = !current_user.school.percent_4.nil?? current_user.school.percent_4 : 0 
         @musicclass = classMusicNotice2
         #@questions.group_by(&:musicin_id)
     end

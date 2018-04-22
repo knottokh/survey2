@@ -16,7 +16,7 @@ class TeacherMusicsController < ApplicationController
         @teaposition = Tposition.all
         @teaunivers = Tuniversity.all
         @teatopic = Ttopic.all
-        
+        @tdegree = Tdegree.all
         user = current_user
         questioncont =  Question.find_by({:title => "teachercount"})
         
@@ -43,7 +43,12 @@ class TeacherMusicsController < ApplicationController
                     flash["formparam"]["position-#{tea.id}"] = t("val.teachers.otherpleaseselect")
                     flash["formparam"]["otherposition-#{tea.id}"]  = tea.position
                 end
-                flash["formparam"]["degree-#{tea.id}"] = tea.degree
+                #flash["formparam"]["degree-#{tea.id}"] = tea.degree
+                finddegree = Tdegree.where(:title => tea.degree)
+                if finddegree.length == 0 && !tea.degree.nil? && !tea.degree.empty?
+                    flash["formparam"]["degree-#{tea.id}"] = t("val.teachers.otherpleaseselect")
+                    flash["formparam"]["otherdegree-#{tea.id}"]  = tea.degree
+                end
                 flash["formparam"]["branch-#{tea.id}"] = tea.branch
                 flash["formparam"]["university-#{tea.id}"] = tea.university
                 finduniversity = Tuniversity.where(:title => tea.university)
@@ -62,7 +67,7 @@ class TeacherMusicsController < ApplicationController
             end
         end
         maxteacher = !(flash["formparam"]["countteachers"].nil?)?Integer(flash["formparam"]["countteachers"]):2 
-        @formpercent = current_user.school.percent_1 
+        @formpercent = !current_user.school.percent_1.nil?? current_user.school.percent_1 : 0 
         
         #@answers1 = Answer.where(:musicin_id => @q1.id)
         #@answers1.each do |ans|
@@ -87,6 +92,7 @@ class TeacherMusicsController < ApplicationController
         @teaposition = Tposition.all
         @teaunivers = Tuniversity.all
         @teatopic = Ttopic.all
+        @tdegree = Tdegree.all
         
         user = current_user
         questioncont =  Question.find_by({:title => "teachercount"})
@@ -118,7 +124,12 @@ class TeacherMusicsController < ApplicationController
                     flash["formparam"]["position-#{tea.id}"] = t("val.teachers.otherpleaseselect")
                     flash["formparam"]["otherposition-#{tea.id}"]  = tea.position
                 end
-                flash["formparam"]["degree-#{tea.id}"] = tea.degree
+                #flash["formparam"]["degree-#{tea.id}"] = tea.degree
+                finddegree = Tdegree.where(:title => tea.degree)
+                if finddegree.length == 0 && !tea.degree.nil? && !tea.degree.empty?
+                    flash["formparam"]["degree-#{tea.id}"] = t("val.teachers.otherpleaseselect")
+                    flash["formparam"]["otherdegree-#{tea.id}"]  = tea.degree
+                end
                 flash["formparam"]["branch-#{tea.id}"] = tea.branch
                 flash["formparam"]["university-#{tea.id}"] = tea.university
                 finduniversity = Tuniversity.where(:title => tea.university)
@@ -144,7 +155,7 @@ class TeacherMusicsController < ApplicationController
             end
         end
         maxteacher = !(flash["formparam"]["countteachers"].nil?)?Integer(flash["formparam"]["countteachers"]):2 
-        @formpercent = (anscount/((9.0 * maxteacher) + 1))*100.0
+        @formpercent = !current_user.school.percent_1.nil?? current_user.school.percent_1 : 0 
         
         #@answers1 = Answer.where(:musicin_id => @q1.id)
         #@answers1.each do |ans|
@@ -216,12 +227,13 @@ class TeacherMusicsController < ApplicationController
                     totherpos = params[:qparam]["otherposition-#{tid}"]
                     totherunivers = params[:qparam]["otheruniversity-#{tid}"]
                     tothertopic = params[:qparam]["othertopic-#{tid}"]
+                    totherdegree = params[:qparam]["otherdegree-#{tid}"]
                     
                     tname = params[:qparam]["name-#{tid}"]
                     tsurname = params[:qparam]["surname-#{tid}"]
                     tstatus = params[:qparam]["status-#{tid}"]
                     tposition = (!totherpos.nil? && !totherpos.empty? ) ? totherpos : checkequalether(params[:qparam]["position-#{tid}"])
-                    tdegree = params[:qparam]["degree-#{tid}"]
+                    tdegree =  (!totherdegree.nil? && !totherdegree.empty? ) ? totherdegree : checkequalether(params[:qparam]["degree-#{tid}"])
                     tbranch = params[:qparam]["branch-#{tid}"]
                     tuniversity = (!totherunivers.nil? && !totherunivers.empty? ) ? totherunivers : checkequalether(params[:qparam]["university-#{tid}"])
                     ttopic = (!tothertopic.nil? && !tothertopic.empty? ) ? tothertopic : checkequalether(params[:qparam]["topic-#{tid}"])
@@ -277,6 +289,7 @@ class TeacherMusicsController < ApplicationController
                     totherpos = Array(params[:qparam]["otherposition"])
                     totherunivers = Array(params[:qparam]["otheruniversity"])
                     tothertopic = Array(params[:qparam]["othertopic"])
+                    totherdegree = Array(params[:qparam]["otherdegree"])
                     
                     tname = Array(params[:qparam]["name"])
                     tsurname = Array(params[:qparam]["surname"])
@@ -293,6 +306,7 @@ class TeacherMusicsController < ApplicationController
                          finalpos = (!totherpos[index].nil? && !totherpos[index].empty? ) ? totherpos[index] : checkequalether(tposition[index])
                          finalunivers = (!totherunivers[index].nil? && !totherunivers[index].empty? ) ? totherunivers[index] : checkequalether(tuniversity[index])
                          finaltopi = (!tothertopic[index].nil? && !tothertopic[index].empty? ) ? tothertopic[index] : checkequalether(ttopic[index])
+                         finaltdegree = (!totherdegree[index].nil? && !totherdegree[index].empty? ) ? totherdegree[index] : checkequalether(tdegree[index])
                          
                          if (!vd.nil? && !vd.empty?)  && (!tname[index].nil? && !tname[index].empty?)
                              behavior = 4;
@@ -304,7 +318,7 @@ class TeacherMusicsController < ApplicationController
                                             surname:tsurname[index],
                                             status:tstatus[index],
                                             position:finalpos,
-                                            degree:tdegree[index],
+                                            degree:finaltdegree,
                                             branch:tbranch[index],
                                             university:finalunivers,
                                             topic:finaltopi,
@@ -327,7 +341,7 @@ class TeacherMusicsController < ApplicationController
                                             surname:tsurname[index],
                                             status:tstatus[index],
                                             position:finalpos,
-                                            degree:tdegree[index],
+                                            degree:finaltdegree,
                                             branch:tbranch[index],
                                             university:finalunivers,
                                             topic:finaltopi,

@@ -42,6 +42,11 @@
   <% end %>
 </div>
 <div class="card-group">
+   <div class="card border-0 ">
+      <div class="card-footer border-0 bg-white text-center h5">
+        <%= link_to t("val.downloadmanual") , downloadmanual_path, method: "get"%>
+      </div>
+  </div>
   <div class="card border-0 ">
       <div class="card-footer border-0 bg-white text-right h5">
          <%= link_to t("val.fogetpass"), new_password_path(resource_name) %>

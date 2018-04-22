@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   
   
   
-  
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username,:password,:password_confirmation,
@@ -160,7 +159,6 @@ class ApplicationController < ActionController::Base
     def classMusicNotice2
         return Array.new(["info","green","light-green","orose","warning"])
     end
-    
   def checktext(percent)
      if percent == 100
          return "แก้ไข"

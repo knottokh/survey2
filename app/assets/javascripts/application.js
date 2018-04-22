@@ -93,7 +93,7 @@ $(function(){
             }
         });
       $(".addNewOtherMusic").click(function(){
-          $(this).parent().find(".musicOtherSet").append($(this).parent().find(".new_music_form").html())
+          $(this).closest(".notice").find(".musicOtherSet").append($(this).closest(".notice").find(".new_music_form").html())
       })
     
        

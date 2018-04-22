@@ -58,7 +58,7 @@ $ ->
               			#console.log(data.users)
               			datahtml = $("<ul><u>")
               			for d in data.users
-              			    datahtml.append("<li>#{d.prefix}#{d.name}  #{d.surname}</li>")
+              			    datahtml.append("<li>#{d.prefix}#{d.name}  #{d.surname}  #{d.phone}</li>")
                     if data.users.length == 0
                       datahtml = "ไม่พบผู้ใช้งาน"
                     else

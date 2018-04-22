@@ -4,6 +4,10 @@ Rails.application.routes.draw do
        sessions: 'users/sessions',
        registrations: 'users/registrations'
   }
+  
+  devise_scope :user do
+    get 'downloadmanual', to: 'users/sessions#downloadmanual'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -37,6 +41,7 @@ Rails.application.routes.draw do
   get '/adminimport' => 'admin#import'
   post '/adminimport' => 'admin#importpost'
   get '/exportto' => 'admin#exportTo'
+   get '/exportschool' => 'admin#exportAminTable'
   
   get "/allschools" => 'schools#allschools'
   get "/getuserinfo" => 'admin#getuserinfo'

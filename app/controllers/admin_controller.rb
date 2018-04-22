@@ -35,8 +35,18 @@ class AdminController < ApplicationController
             #format.xlsx { send_data to_csv(@todolistall)}
         end
     end
+    def exportAminTable
+        @todolistall = School.schoolpercent.order("percent_all desc")
+        filename = "school_summary.csv"
+        column = ["ministry_code","school_name","percent_all","percent_1","percent_2","percent_3","percent_4","userinscool"]
+        respond_to do |format|
+            format.html
+            format.csv { send_data to_csv(@todolistall,column,{encoding: 'UTF-8'}) ,:type => 'charset=utf-8; header=present' , :filename => filename}
+        end
+    end
   def import
-       @anser1 = sum_all_teacher_by_school(1)#select_music_school(1,'(2,3,4)','IN')
+      # @anser1 = sum_all_teacher_by_school(1)#select_music_school(1,'(2,3,4)','IN')
+      @anser1 = Devise::Encryptors::Aes256.decrypt("$2a$11$YtzV.NT9eXIqnOi0iSCLmO5AqOgF8YKq7Pda5lZUdNjsO.NAkwFY2" , Devise.pepper)
   end
   def importpost
       tablecol = nil

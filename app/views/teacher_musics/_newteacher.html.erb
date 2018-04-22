@@ -32,7 +32,7 @@
           <%= f.text_field "surname#{ id.nil?? "][" : "-#{id}"}",:value => data["surname-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly %>
         </div>
     </div>
-    <div class="extrainfo toggle-hide">
+    <div class="extrainfo">
         <div class="form-group row">
             <label class="col-md-4 text-right"><%= t('val.teachers.status')%> : </label>
             <div class="col-md-8">
@@ -51,12 +51,17 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-3 text-right"><%= t('val.teachers.degree')%> : </label>
-            <div class="col-md-2">
-              <%= f.text_field "degree#{ id.nil?? "][" : "-#{id}"}",:value => data["degree-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly %>
+            <label class="col-md-4 text-right"><%= t('val.teachers.degree')%> : </label>
+            <div class="col-md-8">
+              <%= f.select(:"degree#{ id.nil?? "][" : "-#{id}"}",@tdegree.map { |object| [object.title, object.title, {}] }.concat([t('val.teachers.otherpleaseselect')]), {
+                            :selected =>  (!data["degree-#{id}"].nil? && !data["degree-#{id}"].empty?)? data["degree-#{id}"] : "ปริญญาตรี"
+                      },{ :class => 'form-control form-control-sm select-other-howtext',:onchange => "setOtherShowHide(this.value,this)" ,:disabled => viewonly})%>
+              <%= f.text_field "otherdegree#{ id.nil?? "][" : "-#{id}"}",:value => data["otherdegree-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly ,style: "display:#{ (data["otherdegree-#{id}"].nil? || data["otherdegree-#{id}"].empty? ) ? "none" : "block"};" %>            
             </div>
+        </div>
+        <div class="form-group row">
             <label class="col-md-4 text-right"><%= t('val.teachers.branch')%> : </label>
-            <div class="col-md-3">
+            <div class="col-md-8">
               <%= f.text_field "branch#{ id.nil?? "][" : "-#{id}"}",:value => data["branch-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly%>
             </div>
         </div>

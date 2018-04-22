@@ -12,10 +12,10 @@ class DashboardController < ApplicationController
           @userlogintime = I18n.l(loguserlogin.created_at.in_time_zone("Bangkok"), format: :long)#loguserlogin.created_at.strftime("%d-%m-%Y")
      end     
         
-     @percentall = current_user.school.percent_all  
-     @percentform1 = current_user.school.percent_1    
-     @percentform2 = current_user.school.percent_2   
-     @percentform3 = current_user.school.percent_3    
-     @percentform4 = current_user.school.percent_4  
+     @percentall = !current_user.school.percent_all.nil?? current_user.school.percent_all : 0  
+     @percentform1 = !current_user.school.percent_1.nil?? current_user.school.percent_1 : 0   
+     @percentform2 = !current_user.school.percent_2.nil?? current_user.school.percent_2 : 0   
+     @percentform3 = !current_user.school.percent_3.nil?? current_user.school.percent_3 : 0  
+     @percentform4 = !current_user.school.percent_4.nil?? current_user.school.percent_4 : 0 
   end
 end
