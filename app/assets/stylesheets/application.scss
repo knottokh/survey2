@@ -6,24 +6,24 @@
 @import "admin";
 @font-face {
     font-family: 'Quark';
-    src: asset_url('subset-Quark-Light.eot');
-    src: asset_url('subset-Quark-Light.eot?#iefix') format('embedded-opentype'),
-        asset_url('subset-Quark-Light.woff2') format('woff2'),
-        asset_url('subset-Quark-Light.woff') format('woff'),
-        asset_url('subset-Quark-Light.ttf') format('truetype'),
-        asset_url('subset-Quark-Light.svg#Quark-Light') format('svg');
+    src: url('/fonts/subset-Quark-Light.eot');
+    src: url('/fonts/subset-Quark-Light.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/subset-Quark-Light.woff2') format('woff2'),
+        url('/fonts/subset-Quark-Light.woff') format('woff'),
+        url('/fonts/subset-Quark-Light.ttf') format('truetype'),
+        url('/fonts/subset-Quark-Light.svg#Quark-Light') format('svg');
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Quark';
-    src: asset_url('subset-Quark-Bold.eot');
-    src: asset_url('subset-Quark-Bold.eot?#iefix') format('embedded-opentype'),
-        asset_url('subset-Quark-Bold.woff2') format('woff2'),
-        asset_url('subset-Quark-Bold.woff') format('woff'),
-        asset_url('subset-Quark-Bold.ttf') format('truetype'),
-        asset_url('subset-Quark-Bold.svg#Quark-Bold') format('svg');
+    src: url('/fonts/subset-Quark-Bold.eot');
+    src: url('/fonts/subset-Quark-Bold.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/subset-Quark-Bold.woff2') format('woff2'),
+        url('/fonts/subset-Quark-Bold.woff') format('woff'),
+        url('/fonts/subset-Quark-Bold.ttf') format('truetype'),
+        url('/fonts/subset-Quark-Bold.svg#Quark-Bold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
