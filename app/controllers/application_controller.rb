@@ -310,7 +310,7 @@ class ApplicationController < ActionController::Base
                                         + (CASE WHEN (branch IS NOT NULL AND branch <> '') THEN 1 ELSE 0 END)
                                         + (CASE WHEN (university IS NOT NULL AND university <> '') THEN 1 ELSE 0 END)
                                         + (CASE WHEN (topic IS NOT NULL  AND topic <> '') THEN 1 ELSE 0 END) ) m
-                                      ").where(wherecase).map {|i| i.m }[0].to_f
+                                      ").where(wherecase).map {|i| i.m.to_f }.inject(0){|sum,x| sum + x }
   end
   def select_music_school(school_id,wherevalue,operate='=')
         wherecase = "answers.school_id = #{school_id} and musictypes.formtype #{operate} #{wherevalue}"
