@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   scope :school_registed, -> {
-     select(:school_id).map(&:school_id).uniq.count
+     select(:school_id).where("school_id is not null").map(&:school_id).uniq.count
   }  
   scope :user_registed, -> {
      where.not(school_id: nil).where(role: "user").count

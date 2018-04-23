@@ -46,7 +46,7 @@ class AdminController < ApplicationController
     end
   def import
       # @anser1 = sum_all_teacher_by_school(1)#select_music_school(1,'(2,3,4)','IN')
-      @anser1 = Devise::Encryptors::Aes256.decrypt("$2a$11$YtzV.NT9eXIqnOi0iSCLmO5AqOgF8YKq7Pda5lZUdNjsO.NAkwFY2" , Devise.pepper)
+      #@anser1 = Devise::Encryptors::Aes256.decrypt("$2a$11$YtzV.NT9eXIqnOi0iSCLmO5AqOgF8YKq7Pda5lZUdNjsO.NAkwFY2" , Devise.pepper)
   end
   def importpost
       tablecol = nil
