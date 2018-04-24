@@ -5,7 +5,7 @@
           <% if id.nil?%>
             <a href="javascript:;" onclick="var r=confirm('<%= t('val.confirmmusicdel')%>'); if(r) {$(this).closest('.OherMusicForm').remove();} return false;"><%=fa_icon "times-circle" , class: "text-danger"%></a>
           <% else %>
-            <%= link_to musicteacherdel_path(:id => id), method: :delete, data: { confirm:t('val.confirmmusicdel') } do %>
+            <%= link_to musicteacherdel_path(:id => id), method: :delete, data: { confirm:t('val.confirmmusicdel') } ,:class => "not-binding-unsave" do %>
                 <%=fa_icon "trash" , class: "text-danger"%>
             <% end %>
           <% end %>

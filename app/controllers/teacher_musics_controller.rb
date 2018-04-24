@@ -43,7 +43,7 @@ class TeacherMusicsController < ApplicationController
                     flash["formparam"]["position-#{tea.id}"] = t("val.teachers.otherpleaseselect")
                     flash["formparam"]["otherposition-#{tea.id}"]  = tea.position
                 end
-                #flash["formparam"]["degree-#{tea.id}"] = tea.degree
+                flash["formparam"]["degree-#{tea.id}"] = tea.degree
                 finddegree = Tdegree.where(:title => tea.degree)
                 if finddegree.length == 0 && !tea.degree.nil? && !tea.degree.empty?
                     flash["formparam"]["degree-#{tea.id}"] = t("val.teachers.otherpleaseselect")
@@ -124,7 +124,7 @@ class TeacherMusicsController < ApplicationController
                     flash["formparam"]["position-#{tea.id}"] = t("val.teachers.otherpleaseselect")
                     flash["formparam"]["otherposition-#{tea.id}"]  = tea.position
                 end
-                #flash["formparam"]["degree-#{tea.id}"] = tea.degree
+                flash["formparam"]["degree-#{tea.id}"] = tea.degree
                 finddegree = Tdegree.where(:title => tea.degree)
                 if finddegree.length == 0 && !tea.degree.nil? && !tea.degree.empty?
                     flash["formparam"]["degree-#{tea.id}"] = t("val.teachers.otherpleaseselect")

@@ -22,9 +22,21 @@
 //= require rails.validations.simple_form
 //= require select2-full
 //= require jquery.dataTables
+// require loading_screen
 //= require_tree .
-
+var unsaved = false;
 $(function(){
+   // hide spinner
+  /*$(".spinner").hide();
+
+
+  $(document).on("page:fetch", function(){
+  $(".spinner").show();
+});
+
+$(document).on("page:receive", function(){
+  $(".spinner").hide();
+});*/
     $(".active-border").each(function(index,elm){
         var per = parseInt($(elm).find(".prec").text(),10)
         //console.log(per)
@@ -35,7 +47,7 @@ $(function(){
         //console.log(100-per)
         $(this).find(".bar").css('height',(100-per)+'%')
     })
-    $(".alert,.notice-alert" ).fadeOut(5000);
+   // $(".alert,.notice-alert" ).fadeOut(5000);
     $(window).scroll(function(){
         if ($(this).scrollTop() > 400) {
             $(".scrollToTop").fadeIn(1000);
@@ -95,6 +107,14 @@ $(function(){
       $(".addNewOtherMusic").click(function(){
           $(this).closest(".notice").find(".musicOtherSet").append($(this).closest(".notice").find(".new_music_form").html())
       })
+
+      // Another way to bind the event
+        $(window).bind('beforeunload', function(event) {
+            if(unsaved){
+                return "You have unsaved changes on this page. Do you want to leave this page and discard your changes or stay on this page?";
+            }
+        });
+        
     
        
 })

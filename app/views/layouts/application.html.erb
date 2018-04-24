@@ -8,6 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="pt-4 pb-4 pl-1 pr-1">
+
     <% if @master_case == 99 %>
         <%= yield %>
     <% else %>
@@ -22,7 +23,7 @@
                <p class="notice-alert notice"><%= notice %></p>
               <% end %>
               <% if alert %>
-               <p class="notice-alert alert"><%= alert %></p>
+               <p class="notice-alert alert p-1 mb-1"><%= alert %></p>
               <% end %>
             <div class="contents">
                <%= yield %>

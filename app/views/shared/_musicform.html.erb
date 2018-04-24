@@ -30,15 +30,15 @@
                                             <% if !viewonly %>
                                             <% case delmusicpath 
                                                when "thai" %>
-                                                    <%= link_to thaimusicdel_path(:id => a.id), method: :delete, data: { confirm: t('val.confirmmusicdel') } do%>
+                                                    <%= link_to thaimusicdel_path(:id => a.id), method: :delete, data: { confirm: t('val.confirmmusicdel')},:class => "not-binding-unsave"  do%>
                                                         <%=fa_icon "trash" , class: "text-danger"%>
                                                     <% end %>
                                               <% when "inter" %>
-                                                    <%= link_to intermusicdel_path(:id => a.id), method: :delete, data: { confirm: t('val.confirmmusicdel') } do%>
+                                                    <%= link_to intermusicdel_path(:id => a.id), method: :delete, data: { confirm: t('val.confirmmusicdel') },:class => "not-binding-unsave"  do%>
                                                         <%=fa_icon "trash" , class: "text-danger"%>
                                                     <% end %>
                                               <% when "folk" %>
-                                                    <%= link_to folkmusicdel_path(:id => a.id), method: :delete, data: { confirm: t('val.confirmmusicdel') } do%>
+                                                    <%= link_to folkmusicdel_path(:id => a.id), method: :delete, data: { confirm: t('val.confirmmusicdel') },:class => "not-binding-unsave"  do%>
                                                         <%=fa_icon "trash" , class: "text-danger"%>
                                                     <% end %>        
                                             <% end %>

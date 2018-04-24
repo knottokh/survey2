@@ -16,3 +16,9 @@ $(document).ready ->
                 $(this).closest(".container-insert").find(".musicOtherSet").append  $(this).closest(".container-insert").find(".new_music_form").html()
     else
         $(this).parent().find("input").val("")
+   
+   $(".container-insert input,.container-insert select").on "change", ->
+         window.unsaved = true
+   $(".container-insert input[type='submit'],.container-insert a.not-binding-unsave").on "click", ->
+        window.unsaved = false
+        this.preventDefault()
