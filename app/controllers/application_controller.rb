@@ -294,7 +294,12 @@ class ApplicationController < ActionController::Base
       Question.joins(:musictype).where(:musictypes => {formtype:form_type}).count * 2.00  
   end
   def sum_all_teacher_by_school(school_id)
-      Answer.where(school_id: school_id,question_id: get_question_id_formtype1).sum("answer").to_i * 9.00 + 1
+      ans = Answer.where(school_id: school_id,question_id: get_question_id_formtype1)#.to_i * 9.00 + 1
+      ansvalue = 0
+      if !ans.nil?
+          ansvalue = ans.map {|i| i.answer.to_f }.inject(0){|sum,x| sum + x }
+      end
+      return  ansvalue * 9.00 + 1
   end 
   def select_form1_answer(school_id)
      ans  = Answer.where(:question_id => get_question_id_formtype1).where(:school_id => school_id).first
