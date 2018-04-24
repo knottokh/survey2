@@ -283,7 +283,12 @@ class ApplicationController < ActionController::Base
         end
   end
   def get_question_id_formtype1
-      Question.joins(:musictype).where(:musictypes => {formtype:1}).last.id
+      getqid = Question.joins(:musictype).where(:musictypes => {formtype:1}).last
+      if !getqid.nil?  
+          return getqid.id
+      else
+          return nil
+      end    
   end
   def get_max_question_count(form_type)
       Question.joins(:musictype).where(:musictypes => {formtype:form_type}).count * 2.00  
@@ -321,7 +326,8 @@ class ApplicationController < ActionController::Base
                        ").where(wherecase).map {|i| i.m.to_f }.inject(0){|sum,x| sum + x }#.where("school_id = 1").map {|i| i.m }[0].to_f
   end
   def update_school_percent(school_id,formtype)
-      answer_form_1 = select_form1_school(school_id) + select_form1_answer(school_id)
+      checkteacercountans = select_form1_answer(school_id)
+      answer_form_1 = (checkteacercountans > 0) ? select_form1_school(school_id) + select_form1_answer(school_id) : 0
       answer_sum_all = answer_form_1 + select_music_school(school_id,'(2,3,4)','IN')
       
       question_sum_all = sum_all_teacher_by_school(school_id)+ get_max_question_count(2) + get_max_question_count(3) + get_max_question_count(4)

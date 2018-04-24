@@ -10,7 +10,7 @@
            <div class="col text-header">
                <div class="form-group">
                    <h1><%= t('val.form1head')%></h1>
-                   <h5><%= t('val.form1pleasinsert')%><span>    </span><%= f.text_field :countteachers,:value => flash["formparam"]["countteachers"] ,size: 2%>
+                   <h5><%= t('val.form1pleasinsert')%><span>    </span><%= f.text_field :countteachers,:value => flash["formparam"]["countteachers"] ,size: 2 ,class: "form-number-only" %>
                        <span>    </span><a href="javascript:;" class="addteachercount btn btn-warning">ตกลง</a></h5>
                </div>
                <hr class="my-3">
