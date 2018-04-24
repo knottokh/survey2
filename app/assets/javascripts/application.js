@@ -32,9 +32,10 @@ $(document).on("page:fetch", function(){
 $(document).on("page:receive", function(){
   $(".spinner").hide();
 });
+
 $(function(){
    // hide spinner
-  $(".spinner").hide();
+   $(".spinner").hide();
    $('.container-insert form').submit(function() {
        $(".spinner").show();
     });
