@@ -24,11 +24,6 @@
                </div>
            </div>
         </div>
-        <% if flash[:question_errors] %>
-                <% flash[:question_errors].each do |error| %>
-                  <div class="alert alert-info p-1 mb-1 " role="alert"><%=error%></div>
-                <%end%>
-        <%end%>
          <div class="dbTeacherSet row justify-content-md-center">
                  <% @teacers.each_with_index do |t,index| %>
                      <%= render partial: "newteacher" , locals: {count: (index+1),f: f,data: flash["formparam"],id: t.id,style: "success",viewonly: false} %>

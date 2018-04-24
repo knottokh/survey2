@@ -8,7 +8,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="pt-4 pb-4 pl-1 pr-1">
-
+   <div class="spinner">
+       <div class="loader-wrapper">
+        <div class="loader"></div>
+     
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+     
+    </div>
+   </div>
     <% if @master_case == 99 %>
         <%= yield %>
     <% else %>

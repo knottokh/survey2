@@ -25,18 +25,20 @@
 // require loading_screen
 //= require_tree .
 var unsaved = false;
-$(function(){
-   // hide spinner
-  /*$(".spinner").hide();
-
-
-  $(document).on("page:fetch", function(){
+$(document).on("page:fetch", function(){
   $(".spinner").show();
 });
 
 $(document).on("page:receive", function(){
   $(".spinner").hide();
-});*/
+});
+$(function(){
+   // hide spinner
+  $(".spinner").hide();
+   $('.container-insert form').submit(function() {
+       $(".spinner").show();
+    });
+
     $(".active-border").each(function(index,elm){
         var per = parseInt($(elm).find(".prec").text(),10)
         //console.log(per)
