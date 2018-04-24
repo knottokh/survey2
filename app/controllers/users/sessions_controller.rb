@@ -30,7 +30,7 @@ class Users::SessionsController < Devise::SessionsController
   
   def downloadmanual
     send_file(
-    "#{Rails.root}/public/merm_manual.pdf",
+    "#{Rails.root}/public/merm_manual_V1.pdf",
     filename: "merm_manual.pdf",
     type: "application/pdf"
     )
