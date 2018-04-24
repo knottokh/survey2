@@ -22,6 +22,14 @@ $(document).ready ->
               $(this).val(pi) 
           else 
               $(this).val("")
+          #case Value2      
+          valdatanumber = $(this).data("numbertype")
+          if valdatanumber == 2
+              #find first 
+              type1val = parseInt($(this).closest("tr").find("input[data-numbertype=1]").val(),10)
+              if pi >  type1val || isNaN(type1val)
+                  $(this).val("")
+              #console.log(type1val)
           #console.log(this.value)
           #console.log(pi)
    $(".container-insert input,.container-insert select").on "change", ->
