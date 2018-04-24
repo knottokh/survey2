@@ -85,8 +85,8 @@ gem 'jquery-datatables-rails'
 gem 'ajax-datatables-rails'
 
 #ssweet alert 2
-gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
-gem 'sweet-alert2-rails'
+#gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+#gem 'sweet-alert2-rails'
 
 #loading screen
 #gem 'loading_screen', '~> 0.2.4'
