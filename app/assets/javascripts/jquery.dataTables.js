@@ -772,7 +772,7 @@
 	
 		/* Check that the class assignment is correct for sorting */
 		var bAsc = $.inArray('asc', oCol.asSorting) !== -1;
-		var bDesc = $.inArray('desc', oCol.asSorting) !== -1;
+		var bDesc = $.inArray('desc nulls last', oCol.asSorting) !== -1;
 		if ( !oCol.bSortable || (!bAsc && !bDesc) )
 		{
 			oCol.sSortingClass = oClasses.sSortableNone;
@@ -12024,7 +12024,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"asSorting": [ 'asc', 'desc' ],
+		"asSorting": [ 'asc', 'desc nulls last' ],
 	
 	
 		/**
@@ -14779,7 +14779,7 @@
 							classes.sSortDesc
 						)
 						.addClass( columns[ colIdx ] == 'asc' ?
-							classes.sSortAsc : columns[ colIdx ] == 'desc' ?
+							classes.sSortAsc : columns[ colIdx ] == 'desc nulls last' ?
 								classes.sSortDesc :
 								column.sSortingClass
 						);
@@ -14806,7 +14806,7 @@
 					cell
 						.removeClass( classes.sSortAsc +" "+classes.sSortDesc )
 						.addClass( columns[ colIdx ] == 'asc' ?
-							classes.sSortAsc : columns[ colIdx ] == 'desc' ?
+							classes.sSortAsc : columns[ colIdx ] == 'desc nulls last' ?
 								classes.sSortDesc :
 								column.sSortingClass
 						);
@@ -14821,7 +14821,7 @@
 							classes.sSortJUIDescAllowed
 						)
 						.addClass( columns[ colIdx ] == 'asc' ?
-							classes.sSortJUIAsc : columns[ colIdx ] == 'desc' ?
+							classes.sSortJUIAsc : columns[ colIdx ] == 'desc nulls last' ?
 								classes.sSortJUIDesc :
 								column.sSortingClassJUI
 						);

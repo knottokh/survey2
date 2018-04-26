@@ -29,7 +29,7 @@ $ ->
       {data: 'percent_4',searchable: false, render: $.fn.dataTable.render.number( ',', '.', 2, '' )}
       {data: 'userinscool',searchable: false}
     ]
-    order: [[ 2, "desc" ]] 
+    order: [[ 2, "desc nulls last" ]] 
     createdRow:  (row, data, index) ->
         #console.log(data)
         rowclass = setrowclass(data.percent_all)
