@@ -50,7 +50,7 @@ $(function(){
         //console.log(100-per)
         $(this).find(".bar").css('height',(100-per)+'%')
     })
-    $(".alert,.notice-alert" ).fadeOut(5000);
+    $(".alert,.notice-alert" ).fadeOut(3000);
     $(window).scroll(function(){
         if ($(this).scrollTop() > 400) {
             $(".scrollToTop").fadeIn(1000);

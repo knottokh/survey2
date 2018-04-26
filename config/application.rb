@@ -1,5 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
+#require 'mailgun'
 require 'iconv'
 require 'rails/all'
 
@@ -24,6 +25,16 @@ module Workspace
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     #config.active_record.raise_in_transactional_callbacks = true
-
+    #config.action_mailer.delivery_method = :smtp
+    #config.action_mailer.smtp_settings = {
+    #  address: "smtp.mailgun.org",
+    #  port: 587,
+    #  domain: "mg.mermthai.com", # CHANGE THIS
+    #  authentication: "plain",
+    #  enable_starttls_auto: true,
+    #  user_name: "postmaster@mg.mermthai.com", # CHANGE THIS
+    #  password: "c2947b8a5855bf854301ba58eb5a2477-52b1d812-01e9f553" # CHANGE THIS
+	  
+	 #} 
   end
 end

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+#gem 'mailgun-ruby', '~>1.1.6', require: 'mailgun'
+#gem 'mailgun_rails'
 gem 'devise' #need install
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

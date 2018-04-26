@@ -11,8 +11,8 @@ class SchoolDatatable < AjaxDatatablesRails::Base
         percent_2:        { source: "School.percent_2" , searchable: false, orderable: false},
         percent_3:        { source: "School.percent_3" , searchable: false, orderable: false},
         percent_4:        { source: "School.percent_4" , searchable: false, orderable: false},
-        percent_all:        { source: "School.percent_all" , searchable: false, orderable: false},
-        userinscool:        { source: "userinscool" , searchable: false, orderable: true},
+        percent_all:        { source: "School.percent_all" , searchable: false, orderable: true},
+        userinscool:        { source: "userinscool" , searchable: false, orderable: false},
         district:        { source: "School.district" , searchable: false, orderable: false},
         id:        { source: "School.id" , searchable: false, orderable: false },
       }
