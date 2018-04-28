@@ -52,15 +52,5 @@ Rails.application.configure do
   #      :authentication => "plain",
   #      :enable_starttls_auto => true
   # }
- #config.action_mailer.smtp_settings = {
- #    :port => 465,
- #    :address => "smtp.mailgun.org",
- #    :user_name => "postmaster@mg.mermthai.com",
- #    :password => "c2947b8a5855bf854301ba58eb5a2477-52b1d812-01e9f553",
- #    :domain => "survey2-knottoc9.c9users.io",
- #    :authentication => :plain,
- #    :enable_starttls_auto => true,
- #    :content_type => 'text/html'
- #  }
 
 end
