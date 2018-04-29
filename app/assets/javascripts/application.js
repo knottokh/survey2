@@ -121,6 +121,30 @@ $(function(){
     
        
 })
+function setOtherShowHideStatus(val,elm){
+    //console.log(val);
+    var $otherinput = $(elm).closest(".showoptionstatus").find("input:last");
+    if(val == "อื่นๆ (ระบุ)") {
+       
+      $otherinput.val('');      
+      $otherinput.show();
+    }else{
+      $otherinput.val(val);
+      $otherinput.hide();
+    }
+}
+function setOtherShowHideStatusOnly(val,elm){
+    //console.log(val);
+    var $otherinput = $(elm).parent().find(".showoptionstatus");
+    if(val == "ปราชญ์ชาวบ้าน") {
+       
+      $otherinput.val('');      
+      $otherinput.show();
+    }else{
+      $otherinput.val(val);
+      $otherinput.hide();
+    }
+}
 function setOtherShowHide(val,elm){
     //console.log(val);
     var $otherinput = $(elm).parent().find("input:last");

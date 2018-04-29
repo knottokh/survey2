@@ -38,7 +38,17 @@
             <div class="col-md-8">
               <%= f.select(:"status#{ id.nil?? "][" : "-#{id}"}",@teastatus.map { |object| [object.title, object.title, {}] }, {:include_blank  => '--เลือก--',
                             :selected =>  data["status-#{id}"]
-                      },{ :class => 'form-control form-control-sm' ,:disabled => viewonly})%>
+                      },{ :class => 'form-control form-control-sm',:onclick => "setOtherShowHideStatusOnly(this.value,this);"  ,:disabled => viewonly})%>
+              <div class="showoptionstatus pt-1" style="display:<%= (data["status-#{id}"] ==  t("val.teachers.formvalue")) ? "block" : "none"%>;">      
+                  <strong><%= t("val.teachers.fromdep")%></strong>
+                  <% @tpostionother.each do |n| %>
+                      <div>
+                          <%= f.radio_button "fromdep#{ id.nil?? "][" : "-#{id}"}", n, :checked => n == data["fromdep-#{id}"] ,:onclick => "setOtherShowHideStatus(this.value,this);" , :disabled => viewonly%>
+                          <%= f.label :confidentiality_level, n %>
+                      </div>
+                    <% end %>       
+                  <%= f.text_field "otherfromdep#{ id.nil?? "][" : "-#{id}"}",:value => data["otherfromdep-#{id}"],class: "form-control form-control-sm" ,:disabled => viewonly ,style: "display:#{ (data["otherfromdep-#{id}"].nil? || data["otherfromdep-#{id}"].empty? ) ? "none" : "block"};" %>     
+              </div>              
             </div>
         </div>
         <div class="form-group row">

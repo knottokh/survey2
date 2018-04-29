@@ -40,7 +40,7 @@
                         <%= link_to t('val.signout'), destroy_user_session_path, method: "delete" ,class: "btn btn-primary"%>
                     </div>
                  </div>
-                 <p><strong><%= t('val.contactadmin') %> <u><%= t('val.adminemail')%></u></strong></p>
+                 <p><strong><%= t('val.contactadmin') %> <u><%= link_to t('val.adminemail'), contact_us_path %></u></strong></p>
             </div> 
       <% end %>  
     </div>

@@ -1,14 +1,7 @@
 <div class="paragraphs form-group">
     <div class="row text-center">
         <div class="col-12">
-            <h5><%= t('val.headsub1')%></h5>
-        </div>
-        <div class="col-12">
-            <h5 class="text-danger">
-              <%= t('val.headwarning1')%>
-              <u><%= t('val.headwarning2')%></u>
-              <%= t('val.headwarning3')%>
-            </h5>
+            <h5><%= t('val.headsub1new')%></h5>
         </div>
     </div>
 </div>
@@ -45,6 +38,9 @@
    <div class="card border-0 ">
       <div class="card-footer border-0 bg-white text-center h5">
         <%= link_to t("val.downloadmanual") , downloadmanual_path, method: "get"%>
+      </div>
+      <div class="card-body  bg-white text-center h5">
+        <p><strong><%= t('val.contactadmin') %> <u><%= link_to t('val.adminemail'), contact_us_path %></u></strong></p>
       </div>
   </div>
   <div class="card border-0 ">

@@ -17,6 +17,9 @@ class TeacherMusicsController < ApplicationController
         @teaunivers = Tuniversity.all
         @teatopic = Ttopic.all
         @tdegree = Tdegree.all
+        @tpostionother  = Array.new(["โรงเรียน",
+                                            "องค์กรปกครองส่วนท้องถิ่น (อปท.)",
+                                            t("val.teachers.otherselect")])
         user = current_user
         questioncont =  Question.find_by({:title => "teachercount"})
         
@@ -37,6 +40,14 @@ class TeacherMusicsController < ApplicationController
                 flash["formparam"]["name-#{tea.id}"] = tea.name
                 flash["formparam"]["surname-#{tea.id}"] = tea.surname
                 flash["formparam"]["status-#{tea.id}"] = tea.status
+                
+                flash["formparam"]["fromdep-#{tea.id}"] = tea.fromdep
+                findotherfroms = @tpostionother.include?(tea.fromdep)
+                if !findotherfroms && !tea.fromdep.nil? && !tea.fromdep.empty?
+                    flash["formparam"]["fromdep-#{tea.id}"] = t("val.teachers.otherselect")
+                    flash["formparam"]["otherfromdep-#{tea.id}"]  = tea.fromdep
+                end
+                
                 flash["formparam"]["position-#{tea.id}"] = tea.position
                 findotherpos = Tposition.where(:title => tea.position)
                 if findotherpos.length == 0 && !tea.position.nil? && !tea.position.empty?
@@ -93,6 +104,9 @@ class TeacherMusicsController < ApplicationController
         @teaunivers = Tuniversity.all
         @teatopic = Ttopic.all
         @tdegree = Tdegree.all
+        @tpostionother  = Array.new(["โรงเรียน",
+                                            "องค์กรปกครองส่วนท้องถิ่น (อปท.)",
+                                            t("val.teachers.otherselect")])
         
         user = current_user
         questioncont =  Question.find_by({:title => "teachercount"})
@@ -118,6 +132,14 @@ class TeacherMusicsController < ApplicationController
                 flash["formparam"]["name-#{tea.id}"] = tea.name
                 flash["formparam"]["surname-#{tea.id}"] = tea.surname
                 flash["formparam"]["status-#{tea.id}"] = tea.status
+                
+                flash["formparam"]["fromdep-#{tea.id}"] = tea.fromdep
+                findotherfroms = @tpostionother.include?(tea.fromdep)
+                if !findotherfroms && !tea.fromdep.nil? && !tea.fromdep.empty?
+                    flash["formparam"]["fromdep-#{tea.id}"] = t("val.teachers.otherselect")
+                    flash["formparam"]["otherfromdep-#{tea.id}"]  = tea.fromdep
+                end
+                
                 flash["formparam"]["position-#{tea.id}"] = tea.position
                 findotherpos = Tposition.where(:title => tea.position)
                 if findotherpos.length == 0 && !tea.position.nil? && !tea.position.empty?
@@ -228,10 +250,14 @@ class TeacherMusicsController < ApplicationController
                     totherunivers = params[:qparam]["otheruniversity-#{tid}"]
                     tothertopic = params[:qparam]["othertopic-#{tid}"]
                     totherdegree = params[:qparam]["otherdegree-#{tid}"]
+                    totherfromdep = params[:qparam]["otherfromdep-#{tid}"]
+                    
                     
                     tname = params[:qparam]["name-#{tid}"]
                     tsurname = params[:qparam]["surname-#{tid}"]
                     tstatus = params[:qparam]["status-#{tid}"]
+                    tformdeporiginal = (!totherfromdep.nil? && !totherfromdep.empty? ) ? totherfromdep : checkequalstatus(params[:qparam]["fromdep-#{tid}"])
+                    tfromdep =  (checkequalstatusTeacher(tstatus) == "") ? tformdeporiginal : ""
                     tposition = (!totherpos.nil? && !totherpos.empty? ) ? totherpos : checkequalether(params[:qparam]["position-#{tid}"])
                     tdegree =  (!totherdegree.nil? && !totherdegree.empty? ) ? totherdegree : checkequalether(params[:qparam]["degree-#{tid}"])
                     tbranch = params[:qparam]["branch-#{tid}"]
@@ -243,7 +269,7 @@ class TeacherMusicsController < ApplicationController
                     
                     behavior = 0;  
                         if !teacher.nil?
-                            if teacher.prefix != tprefix || teacher.name != tname || teacher.surname != tsurname || teacher.status != tstatus || teacher.position != tposition || teacher.degree != tdegree || teacher.branch != tbranch || teacher.university != tuniversity || teacher.topic != ttopic || teacher.remark != tremark
+                            if teacher.prefix != tprefix || teacher.name != tname || teacher.surname != tsurname || teacher.fromdep != tfromdep || teacher.status != tstatus || teacher.position != tposition || teacher.degree != tdegree || teacher.branch != tbranch || teacher.university != tuniversity || teacher.topic != ttopic || teacher.remark != tremark
                                  behavior = 5
                                  updateschool= true
                                   teacher.update({
@@ -251,6 +277,7 @@ class TeacherMusicsController < ApplicationController
                                             name:tname,
                                             surname:tsurname,
                                             status:tstatus,
+                                            fromdep:tfromdep,
                                             position:tposition,
                                             degree:tdegree,
                                             branch:tbranch,
@@ -274,6 +301,7 @@ class TeacherMusicsController < ApplicationController
                                             name:tname,
                                             surname:tsurname,
                                             status:tstatus,
+                                            fromdep:tfromdep,
                                             position:tposition,
                                             degree:tdegree,
                                             branch:tbranch,
@@ -290,10 +318,12 @@ class TeacherMusicsController < ApplicationController
                     totherunivers = Array(params[:qparam]["otheruniversity"])
                     tothertopic = Array(params[:qparam]["othertopic"])
                     totherdegree = Array(params[:qparam]["otherdegree"])
+                    totherfromdep = Array(params[:qparam]["otherfromdep"])
                     
                     tname = Array(params[:qparam]["name"])
                     tsurname = Array(params[:qparam]["surname"])
                     tstatus = Array(params[:qparam]["status"])
+                    tfromdep = Array(params[:qparam]["fromdep"])
                     tposition = Array(params[:qparam]["position"])
                     tdegree = Array(params[:qparam]["degree"])
                     tbranch = Array(params[:qparam]["branch"])
@@ -303,6 +333,8 @@ class TeacherMusicsController < ApplicationController
                     tprefix.each_with_index do |vd,index|
                          behavior = 0;    
                          
+                         tformdeporiginal = (!totherfromdep[index].nil? && !totherfromdep[index].empty? ) ? totherfromdep[index] : checkequalstatus(tfromdep[index])
+                         tfromdepfinal =  (checkequalstatusTeacher(tstatus[index]) == "") ? tformdeporiginal : ""
                          finalpos = (!totherpos[index].nil? && !totherpos[index].empty? ) ? totherpos[index] : checkequalether(tposition[index])
                          finalunivers = (!totherunivers[index].nil? && !totherunivers[index].empty? ) ? totherunivers[index] : checkequalether(tuniversity[index])
                          finaltopi = (!tothertopic[index].nil? && !tothertopic[index].empty? ) ? tothertopic[index] : checkequalether(ttopic[index])
@@ -317,6 +349,7 @@ class TeacherMusicsController < ApplicationController
                                             name:tname[index],
                                             surname:tsurname[index],
                                             status:tstatus[index],
+                                            fromdep:tfromdepfinal,
                                             position:finalpos,
                                             degree:finaltdegree,
                                             branch:tbranch[index],
@@ -340,6 +373,7 @@ class TeacherMusicsController < ApplicationController
                                             name:tname[index],
                                             surname:tsurname[index],
                                             status:tstatus[index],
+                                            fromdep:tfromdepfinal,
                                             position:finalpos,
                                             degree:finaltdegree,
                                             branch:tbranch[index],
@@ -372,6 +406,20 @@ class TeacherMusicsController < ApplicationController
   end
     
     private
+    def checkequalstatusTeacher(d)
+          if d == t("val.teachers.formvalue")
+                return ""
+            end
+        
+        return d
+    end
+    def checkequalstatus(d)
+          if d == t("val.teachers.otherselect")
+                return ""
+            end
+        
+        return d
+    end
     def checkequalether(d)
             if d == t("val.teachers.otherpleaseselect")
                 return ""

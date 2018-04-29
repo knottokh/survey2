@@ -92,3 +92,5 @@ gem 'jquery-datatables-rails'
 
 #loading screen
 #gem 'loading_screen', '~> 0.2.4'
+
+gem 'contact_us', '~> 1.0.1'

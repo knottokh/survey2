@@ -1,0 +1,28 @@
+<h2><%= t('.contact_us') %></h2>
+<%= simple_form_for @contact, :url => contacts_path do |f| %>
+  <div class="row">
+     <div class="col-sm-6">
+        <div class="form-group">
+            <%= f.input :name,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('.name')}" if ContactUs.require_name %>
+        </div>
+        <div class="form-group">
+            <%= f.input :email,:label => false,input_html: {:value => (!current_user.nil? ? current_user.email : nil ),class: "form-control" } ,placeholder: "#{t('.email')}*"%>
+        </div>
+        <div class="form-group">
+            <%= f.input :subject,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('.subject')}*" if ContactUs.require_subject %>
+        </div>
+        <div class="form-group">
+            <%= f.input :message , :as => :text ,:label => false,input_html: {class: "form-control" } ,placeholder: "#{t('.message')}*" %>
+        </div>
+        <div class="row form-group">
+            <div class="col">
+                 <%= link_to t('val.backbasic'), root_path, method: "get" ,class: "btn btn-primary box-shadow--8dp"%>
+            </div>
+            <div class="col text-right">
+                <%= f.button :submit, :value => t('.submit'), :alt => t('.submit'), :id => 'contact_us_contact_submit', :title => t('.submit'),class: "btn btn-pink box-shadow--8dp form-control" %>
+            </div>
+        </div>
+     </div>
+  </div>
+  
+<% end %>

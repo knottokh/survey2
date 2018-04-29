@@ -44,8 +44,6 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    ajax-datatables-rails (0.4.0)
-      railties (>= 4.0)
     arel (8.0.0)
     autoprefixer-rails (8.3.0)
       execjs
@@ -74,6 +72,8 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    contact_us (1.0.1)
+      rails (>= 4.2.0)
     crass (1.0.4)
     debug_inspector (0.0.3)
     devise (4.4.3)
@@ -82,8 +82,6 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    domain_name (0.5.20180417)
-      unf (>= 0.0.5, < 1.0.0)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.23)
@@ -91,8 +89,6 @@ GEM
       railties (>= 3.2, < 6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    http-cookie (1.0.3)
-      domain_name (~> 0.5)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     iconv (1.0.5)
@@ -128,19 +124,11 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    mailgun_rails (0.9.0)
-      actionmailer (>= 3.2.13)
-      json (>= 1.7.7)
-      rest-client (>= 1.6.7)
     method_source (0.9.0)
-    mime-types (3.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0521)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
-    netrc (0.11.0)
     nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -185,10 +173,6 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    rest-client (2.0.2)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
     roo (2.7.1)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
@@ -232,9 +216,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.10)
       execjs (>= 0.3.0, < 3)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.5)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (2.3.0)
@@ -252,13 +233,13 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store (~> 1.1.1)
-  ajax-datatables-rails
   bootstrap (~> 4.0.0)
   bootstrap-select-rails (~> 1.12, >= 1.12.4)
   byebug
   client_side_validations (~> 11.1.2)
   client_side_validations-simple_form (~> 6.5.1)
   coffee-rails (~> 4.2)
+  contact_us (~> 1.0.1)
   devise
   font-awesome-rails
   iconv (~> 1.0)
@@ -266,7 +247,6 @@ DEPENDENCIES
   jquery-datatables-rails
   jquery-rails (~> 4.3.1)
   kaminari (~> 1.1.1)
-  mailgun_rails
   pg (~> 0.21)
   popper_js (~> 1.12.9)
   rails (= 5.1.3)
