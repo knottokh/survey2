@@ -36,7 +36,7 @@ class AdminController < ApplicationController
         end
     end
     def exportAminTable
-        @todolistall = School.schoolpercent.order("percent_all desc")
+        @todolistall = School.schoolpercent.order("percent_all desc nulls last")
         filename = "school_summary.csv"
         column = ["ministry_code","school_name","percent_all","percent_1","percent_2","percent_3","percent_4","userinscool"]
         respond_to do |format|

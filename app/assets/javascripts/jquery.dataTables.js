@@ -2697,7 +2697,7 @@
 			columnSearch = preColSearch[i];
 			dataProp = typeof column.mData=="function" ? 'function' : column.mData ;
 			columnProb = {};
-			$.extend(columnProb,{data:  dataProp});
+		/*	$.extend(columnProb,{data:  dataProp});
 			if(column.bSearchable)
 				$.extend(columnProb,{searchable: column.bSearchable,search: {
 					value: columnSearch.sSearch,
@@ -2705,8 +2705,8 @@
 				}});
 			if(column.bSortable)
 				$.extend(columnProb,{orderable:  column.bSortable});
-			d.columns.push( columnProb);
-			/*d.columns.push( {
+			d.columns.push( columnProb);*/
+			d.columns.push( {
 				data:       dataProp,
 				name:       column.sName,
 				searchable: column.bSearchable,
@@ -2715,7 +2715,7 @@
 					value: columnSearch.sSearch,
 					regex: columnSearch.bRegex
 				}
-			} );*/
+			} );
 	
 			param( "mDataProp_"+i, dataProp );
 	

@@ -44,6 +44,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    ajax-datatables-rails (0.4.0)
+      railties (>= 4.0)
     arel (8.0.0)
     autoprefixer-rails (8.3.0)
       execjs
@@ -233,6 +235,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store (~> 1.1.1)
+  ajax-datatables-rails
   bootstrap (~> 4.0.0)
   bootstrap-select-rails (~> 1.12, >= 1.12.4)
   byebug
