@@ -139,6 +139,9 @@ th:
         percent_3: "ดนตรีสากล"
         percent_4: "ดนตรีพื้นบ้าน"
         userinscool: "สมาชิก"
+    password:
+        noemail: "ไม่มี Email นี้ในระบบ" 
+        adminnotallow: "Email Admin not allow to change password"
   activerecord:
     attributes:
       user:
@@ -228,7 +231,7 @@ th:
     messages:
       accepted: ต้องถูกยอมรับ
       blank: ต้องไม่เว้นว่างเอาไว้
-      confirmation: ไม่ตรงกับการยืนยัน
+      confirmation: รหัสผ่านไม่ตรงกัน
       empty: ต้องไม่เว้นว่างเอาไว้
       equal_to: ต้องมีค่าเท่ากับ %{count}
       even: ต้องเป็นจำนวนคู่

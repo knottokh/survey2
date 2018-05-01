@@ -11,19 +11,24 @@ class Users::PasswordsController < Devise::PasswordsController
      curemail = resource_params[:email].downcase
      adminemail = "merm.cu@gmail.com".downcase
      if curemail != adminemail
-          self.resource = resource_class.send_reset_password_instructions(resource_params)
-          yield resource if block_given?
-          
-          if !resource.nil?
-            #reset_password_token = reset_password_token = Devise.token_generator.digest(resource, :reset_password_token, resource.reset_password_token)
-            redirect_to edit_password_url(resource, reset_password_token: resource.send_reset_password_instructions )
-            #flash[:dataresourse] = resource.send_reset_password_instructions+ "---"+resource.reset_password_token
-            #redirect_to new_user_password_path
-          else
-            respond_with(resource)
+          user = User.find_by(:email => curemail)
+          if !user.nil?
+              self.resource = resource_class.send_reset_password_instructions(resource_params)
+              yield resource if block_given?
+              
+              if !resource.nil?
+                #reset_password_token = reset_password_token = Devise.token_generator.digest(resource, :reset_password_token, resource.reset_password_token)
+                redirect_to edit_password_url(resource, reset_password_token: resource.send_reset_password_instructions )
+                #flash[:dataresourse] = resource.send_reset_password_instructions+ "---"+resource.reset_password_token
+                #redirect_to new_user_password_path
+              else
+                respond_with(resource)
+              end
+           else
+             redirect_to new_user_password_path ,:notice => t("val.password.noemail") 
           end
      else
-         redirect_to new_user_password_path ,:alert => "Email Admin not allow to change password"
+         redirect_to new_user_password_path ,:notice => t("val.password.adminnotallow") 
      end
       
    end
