@@ -9,9 +9,10 @@ class Users::PasswordsController < Devise::PasswordsController
   # POST /resource/password
    def create
      curemail = resource_params[:email].downcase
+     curcardnumber = resource_params[:cardnumber]
      adminemail = "merm.cu@gmail.com".downcase
      if curemail != adminemail
-          user = User.find_by(:email => curemail)
+          user = User.find_by(:email => curemail,:cardnumber => curcardnumber)
           if !user.nil?
               self.resource = resource_class.send_reset_password_instructions(resource_params)
               yield resource if block_given?
@@ -25,7 +26,7 @@ class Users::PasswordsController < Devise::PasswordsController
                 respond_with(resource)
               end
            else
-             redirect_to new_user_password_path ,:notice => t("val.password.noemail") 
+             redirect_to new_user_password_path ,:notice => t("val.password.noemailorcard") 
           end
      else
          redirect_to new_user_password_path ,:notice => t("val.password.adminnotallow") 

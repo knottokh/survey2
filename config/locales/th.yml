@@ -69,7 +69,7 @@ th:
     backtosignin: "กลับไปยังหน้าแรก"
     signintext: "เข้าสู่ระบบกรอกข้อมูล"
     signuptext: "ลงทะเบียนผู้ให้ข้อมูลครั้งแรก"
-    resetemialhint: "กรุณากรอกอีเมลล์ เพื่อส่งคำขอเปลี่ยนรหัสผ่าน"
+    resetemialhint: "กรุณากรอกอีเมลล์และเลขประจำตัวประชาชน เพื่อส่งคำขอเปลี่ยนรหัสผ่าน"
     signupconfirm: "ยืนยัน"
     upddatetext: "บันทึก"
     addsignuserandpass: "กำหนดชื่อผู้ใช้งานและรหัสผ่าน"
@@ -141,6 +141,7 @@ th:
         userinscool: "สมาชิก"
     password:
         noemail: "ไม่มี Email นี้ในระบบ" 
+        noemailorcard: "Email หรือ เลขประจำตัวประชาชน นี้ไม่มีในระบบ" 
         adminnotallow: "Email Admin not allow to change password"
   activerecord:
     attributes:
