@@ -42,7 +42,11 @@ Rails.application.routes.draw do
   get '/adminimport' => 'admin#import'
   post '/adminimport' => 'admin#importpost'
   get '/exportto' => 'admin#exportTo'
-   get '/exportschool' => 'admin#exportAminTable'
+  get '/exportschool' => 'admin#exportAminTable'
+  get '/exportschoolexcel' => 'admin#exportExcel'
+  get '/admindashboard' => 'admin#show'
+  get '/searchuser' => 'admin#searchuser'
+  post '/updateuserschool' => 'admin#updateuserschool'
   
   get "/allschools" => 'schools#allschools'
   get "/getuserinfo" => 'admin#getuserinfo'

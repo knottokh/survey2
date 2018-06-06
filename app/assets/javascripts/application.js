@@ -94,7 +94,7 @@ $(function(){
             templateResult: function(school) {
                 if(typeof school.ministry_code !== "undefined" && typeof school.school_name !== "undefined")
                 
-                    return school.ministry_code +" "+ school.school_name
+                    return school.ministry_code +" "+ school.school_name+" "+ school.province
                 
                 return school.school_name || school.ministry_code;
             },
@@ -102,7 +102,7 @@ $(function(){
                 
                 if(typeof school.ministry_code !== "undefined" && typeof school.school_name !== "undefined")
                 
-                    return school.ministry_code +" "+ school.school_name
+                    return school.ministry_code +" "+ school.school_name+" "+ school.province
                 
                return "ชื่อสถานศึกษา หรือ รหัสสถานศึกษา*"
             }

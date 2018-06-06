@@ -74,6 +74,35 @@ $ ->
         #var includeUsuallyIgnored = $("#include-checkbox").is(":checked");
         #aoData.push({name: "includeUsuallyIgnored", value: includeUsuallyIgnored});
     
-
-    
+  $("#searchuser").on "click", ->    
+      name = $("#name").val()
+      surname = $("#surname").val()
+      $("#userforchangeschool").empty()
+      $.ajax 
+        url: "/searchuser"
+        method: "GET"
+        dataType: "json"
+        data: {name: name,surname: surname}
+        error: (xhr, status, error) ->
+          console.error('AJAX Error: ' + status + error);
+        success: (response) ->
+          #console.log(response.users)
+          if response.users != null
+            datahtml = $("<ul class='list-group'><u>")
+            for d in response.users
+              datahtml.append("<li class='list-group-item'><span>#{d.prefix}#{d.name}  #{d.surname}  #{d.school_name} #{d.province}</span><a data-uid='#{d.uid}' class='btn btn-info updateuserid'>update</a></li>")
+            
+            $("#userforchangeschool").append datahtml
+            $(".updateuserid").on "click", ->  
+              uid = $(this).data("uid")
+              schoolid = $("#user_school_id").val()
+              $.ajax 
+                url: "/updateuserschool"
+                method: "POST"
+                dataType: "json"
+                data: {id: uid,schoolid: schoolid}
+                error: (xhr, status, error) ->
+                  console.error('AJAX Error: ' + status + error);
+                success: (response) ->
+                  console.log(response)
     

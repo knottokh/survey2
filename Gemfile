@@ -79,7 +79,7 @@ gem 'client_side_validations-simple_form', '~> 6.5.1'
 gem 'activerecord-session_store', '~> 1.1.1' #need install
 
 #import excel
-gem 'roo', '~> 2.7'
+gem 'roo', '~> 2.7.0'
 gem 'iconv', '~> 1.0'
 
 #datatable
@@ -94,3 +94,9 @@ gem 'jquery-datatables-rails'
 #gem 'loading_screen', '~> 0.2.4'
 
 gem 'contact_us', '~> 1.0.1'
+
+#export xlsx
+#gem 'rubyzip', '~> 1.0.0' # will load new rubyzip version
+#gem 'zip-zip' # will load compatibility for old rubyzip API.bun
+#gem 'axlsx', '= 2.0.1'
+#gem 'axlsx_rails'

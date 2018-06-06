@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: @sheetname) do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row @headerarr
+  
+  # each user is a row on your spreadsheet
+  @dataexcel.each do |data|
+    sheet.add_row data
+  end
+end

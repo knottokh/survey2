@@ -20,8 +20,42 @@ class AdminController < ApplicationController
         @form4_success_percent  = form4_success.percent_of(school_count)
         
     end
+    #dashboard
     def show
-        
+        @master_case = 99
+    end
+    
+    def searchuser
+        @searchuser = nil
+        if !params[:name].nil? and params[:name].present? and !params[:surname].nil? and params[:surname].present?
+           @searchuser = User.joins(:school).select("*,users.id uid").where("users.name like '%#{params[:name]}%' or users.surname like '%#{params[:surname]}%'")
+        elsif !params[:name].nil? and params[:name].present? 
+        @searchuser = User.joins(:school).select("*,users.id uid").where("users.name like '%#{params[:name]}%'")
+        elsif !params[:surname].nil? and params[:surname].present? 
+          @searchuser = User.joins(:school).select("*,users.id uid").where("users.surname like '%#{params[:surname]}%'")
+        end
+        respond_to do |format|  
+            format.html
+            format.json { 
+              render :json => { :users =>  @searchuser} 
+          }
+      end
+    end
+    def updateuserschool
+        returns = "none"
+        if !params[:id].nil? and params[:id].present? and !params[:schoolid].nil? and params[:schoolid].present?
+            us = User.find(params[:id])
+            if !us.nil?
+                us.update({school_id: params[:schoolid]})
+                returns = us.save
+            end
+        end    
+        respond_to do |format|  
+            format.html
+            format.json { 
+              render :json => {:result => returns}
+        }
+        end
     end
     def exportTo
         @todolistall = Musicin.all
@@ -44,6 +78,25 @@ class AdminController < ApplicationController
             format.csv { send_data to_csv(@todolistall,column,{encoding: 'UTF-8'}) ,:type => 'charset=utf-8; header=present' , :filename => filename}
         end
     end
+  def exportExcel
+        #schooldata = School.schoolpercent#.order("percent_all desc nulls last")
+        @dataexcel = Array.new
+        @sheetname  = "school_summary"
+        filename = "school_summary"
+        @headerarr  = Array.new#["ministry_code","school_name","percent_all","percent_1","percent_2","percent_3","percent_4","userinscool"]
+        @headerarr.push("aa")
+        #schooldata.each do |data|
+        #  @dataexcel.push(data.attributes.values_at(*@headerarr))
+        #end
+        respond_to do |format|
+            format.html
+            format.xlsx do
+                response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xlsx"'
+                render "admin/printexport.xlsx"
+            end 
+            #format.csv { send_data to_csv(@todolistall,column,{encoding: 'UTF-8'}) ,:type => 'charset=utf-8; header=present' , :filename => filename}
+        end
+  end    
   def import
       # @anser1 = sum_all_teacher_by_school(1)#select_music_school(1,'(2,3,4)','IN')
       #@anser1 = Devise::Encryptors::Aes256.decrypt("$2a$11$YtzV.NT9eXIqnOi0iSCLmO5AqOgF8YKq7Pda5lZUdNjsO.NAkwFY2" , Devise.pepper)

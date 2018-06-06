@@ -8,7 +8,7 @@ class SchoolsController < ApplicationController
           @schools = School.all
       end
 
-      @schools =  @schools.select("id,ministry_code,school_name").paginate(:page => params[:page], :per_page => params[:page_limit])
+      @schools =  @schools.select("id,ministry_code,school_name,province").paginate(:page => params[:page], :per_page => params[:page_limit])
 
         respond_to do |format|  
             format.html

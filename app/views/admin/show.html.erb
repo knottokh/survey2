@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row notice">
+          <div class="col">
+              <h1>Admin’s DASHBOARD</h1>
+          </div>
+         <div class="col text-right">
+               <%= link_to t('val.signout'), destroy_user_session_path, method: "delete" ,class: "btn btn-danger"%>
+         </div>
+    </div> 
+    <div class="card">
+        <div class="card-header bg-primary h3 text-white">Change User Schools</div>
+        <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6 form-inline border-right">
+                  <div class="row w-100 mb-2">
+                      <div class="col-6">
+                           <%= text_field_tag :name,nil,placeholder:"ชื่อ"%>
+                      </div>   
+                      <div class="col-6">
+                            <%= text_field_tag :surname,nil,placeholder:"นามสกุล"%>
+                      </div>  
+                  </div>
+              </div> 
+              <div class="col-sm-6 form-inline">
+                  <div class="row w-100 mb-2">
+                      <div class="col ml-4">
+                           <button id="searchuser" type="button" class="btn btn-primary">Search</button>
+                      </div>   
+                  </div>     
+              </div>   
+            </div>
+        </div>
+        <div class="card-body">
+            <%= select_tag :user_school_id, options_for_select([]),
+                    prompt: "Select school", class: "" %>
+        </div>
+        <div id="userforchangeschool" class="card-body list-group">
+        </div>
+    </div>
+</div>
