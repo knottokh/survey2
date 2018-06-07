@@ -293,10 +293,10 @@ class ApplicationController < ActionController::Base
   def get_max_question_count(form_type)
       Question.joins(:musictype).where(:musictypes => {formtype:form_type}).count * 2.00  
   end
-  def sum_all_teacher_by_school(school_id)
+  def sum_all_teacher_by_school(school_id,maxteacher)
       ans = Answer.where(school_id: school_id,question_id: get_question_id_formtype1)#.to_i * 9.00 + 1
       ansvalue = 0
-      if !ans.nil?
+      if !ans.nil? and maxteacher > 0
           ansvalue = ans.map {|i| i.answer.to_f }.inject(0){|sum,x| sum + x }
       end
       return  ansvalue * 9.00 + 1
@@ -335,13 +335,13 @@ class ApplicationController < ActionController::Base
       answer_form_1 = (checkteacercountans > 0) ? select_form1_school(school_id) + select_form1_answer(school_id) : 0
       answer_sum_all = answer_form_1 + select_music_school(school_id,'(2,3,4)','IN')
       
-      question_sum_all = sum_all_teacher_by_school(school_id)+ get_max_question_count(2) + get_max_question_count(3) + get_max_question_count(4)
+      question_sum_all = sum_all_teacher_by_school(school_id,checkteacercountans)+ get_max_question_count(2) + get_max_question_count(3) + get_max_question_count(4)
       param = {}
       param["percent_all"] = answer_sum_all.percent_of(question_sum_all)
       case formtype
         when 1 
             
-            param["percent_#{formtype}"] = answer_form_1.percent_of(sum_all_teacher_by_school(school_id))
+            param["percent_#{formtype}"] = answer_form_1.percent_of(sum_all_teacher_by_school(school_id,checkteacercountans))
         when 2 , 3, 4 
             param["percent_#{formtype}"] = select_music_school(school_id,formtype).percent_of(get_max_question_count(formtype))
       end

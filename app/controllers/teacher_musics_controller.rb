@@ -190,6 +190,9 @@ class TeacherMusicsController < ApplicationController
         #end
         #@questions.group_by(&:musicin_id)
         deffobj = maxteacher - @teacers.length
+        if deffobj < 0
+            deffobj = 0
+        end 
         @diff = Array.new(deffobj)
 
         
