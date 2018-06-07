@@ -88,6 +88,9 @@ class TeacherMusicsController < ApplicationController
         #end
         #@questions.group_by(&:musicin_id)
         deffobj = maxteacher - @teacers.length
+        if deffobj < 0
+            deffobj = 0
+        end 
         @diff = Array.new(deffobj)
         #@answer_form_1 = select_form1_school(current_user.school_id) + select_form1_answer(current_user.school_id)
         
