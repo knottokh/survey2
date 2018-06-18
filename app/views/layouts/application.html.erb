@@ -25,7 +25,10 @@
             <header class="paragraphs form-group">
                 <div class="row form-group">
                     <div class="col" style="max-width:100px"><%= image_tag("logo.png",style: "height:120px") %></div>
-                    <div class="col"><h2 class="text-primary"><%= t('val.headertext') %></h2></div>
+                    <div class="col">
+                        <h2 class="text-primary"><%= t('val.headertext') %></h2>
+                        <h2 class="text-danger"><%= t('val.headertext2') %></h2>
+                    </div>
                 </div>
             </header>
             <% if notice %>

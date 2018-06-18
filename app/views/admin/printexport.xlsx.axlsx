@@ -5,7 +5,9 @@ wb.add_worksheet(name: @sheetname) do |sheet|
   sheet.add_row @headerarr
   
   # each user is a row on your spreadsheet
-  @dataexcel.each do |data|
-    sheet.add_row data
-  end
+  if !@dataexcel.empty?
+    @dataexcel.each do |data|
+      sheet.add_row data
+    end
+  end  
 end

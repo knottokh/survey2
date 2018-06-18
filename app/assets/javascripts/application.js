@@ -32,7 +32,9 @@ $(document).on("page:fetch", function(){
 $(document).on("page:receive", function(){
   $(".spinner").hide();
 });
-
+$(document).on("ajax:success", function() {
+    $("#exportexceladmin").removeAttr('data-disable-with');
+});
 $(function(){
    // hide spinner
    $(".spinner").hide();
@@ -118,7 +120,7 @@ $(function(){
             }
         });
         
-    
+     $("#exportexceladmin").removeAttr('data-disable-with');
        
 })
 function setOtherShowHideStatus(val,elm){

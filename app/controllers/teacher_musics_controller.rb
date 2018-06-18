@@ -12,7 +12,7 @@ class TeacherMusicsController < ApplicationController
         #    flash["formparam"]= {}
         #end
                 
-        @teastatus = Tstatusjosb.all
+        @teastatus = Tstatusjosb.all.order("title")
         @teaposition = Tposition.all
         @teaunivers = Tuniversity.all
         @teatopic = Ttopic.all
@@ -102,7 +102,7 @@ class TeacherMusicsController < ApplicationController
         #    flash["formparam"]= {}
         #end
                 
-        @teastatus = Tstatusjosb.all
+        @teastatus = Tstatusjosb.all.order("title")
         @teaposition = Tposition.all
         @teaunivers = Tuniversity.all
         @teatopic = Ttopic.all

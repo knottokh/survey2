@@ -23,6 +23,21 @@ class AdminController < ApplicationController
     #dashboard
     def show
         @master_case = 99
+        @dbtype = ["Music Answer", #answers
+        "Log Music Answer", #loghistories
+        "Form Lock User", #formmanages
+        "Teacher Answer", #tanswers
+        "Log Teacher Answer", #tloghistories
+        "Users", #users
+        "ALL Universities", #tuniversities
+        "ALL Topices", #ttopics
+        "ALL Status Jobs", #tstatusjosbs
+        "ALL Positions", #tpositions
+        "ALL Degree", #tdegrees
+        "ALL Musics", #musictypes
+        "ALL Question", #questions
+        "ALL Schools"] #schools
+        
     end
     
     def searchuser
@@ -58,7 +73,7 @@ class AdminController < ApplicationController
         end
     end
     def exportTo
-        @todolistall = Musicin.all
+        @todolistall = School.all
         filename = "exportnaja"
         respond_to do |format|
             format.html
@@ -70,32 +85,75 @@ class AdminController < ApplicationController
         end
     end
     def exportAminTable
-        @todolistall = School.schoolpercent.order("percent_all desc nulls last")
-        filename = "school_summary.csv"
-        column = ["ministry_code","school_name","percent_all","percent_1","percent_2","percent_3","percent_4","userinscool"]
+        schooldata = School.schoolpercent.order("percent_all desc nulls last")
+        @dataexcel = Array.new
+        @sheetname  = "school_summary"
+        filename = "school_summary_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}"
+        @headerarr  = ["ministry_code","school_name","percent_all","percent_1","percent_2","percent_3","percent_4","userinscool"]
+        schooldata.each do |data|
+          @dataexcel.push(data.attributes.values_at(*@headerarr))
+        end
         respond_to do |format|
-            format.html
-            format.csv { send_data to_csv(@todolistall,column,{encoding: 'UTF-8'}) ,:type => 'charset=utf-8; header=present' , :filename => filename}
+          format.html
+          format.xlsx do
+            response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xlsx"'
+            render "printexport.xlsx"
+          end  
         end
     end
   def exportExcel
-        #schooldata = School.schoolpercent#.order("percent_all desc nulls last")
-        @dataexcel = Array.new
-        @sheetname  = "school_summary"
-        filename = "school_summary"
-        @headerarr  = Array.new#["ministry_code","school_name","percent_all","percent_1","percent_2","percent_3","percent_4","userinscool"]
-        @headerarr.push("aa")
-        #schooldata.each do |data|
-        #  @dataexcel.push(data.attributes.values_at(*@headerarr))
-        #end
-        respond_to do |format|
-            format.html
-            format.xlsx do
-                response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xlsx"'
-                render "admin/printexport.xlsx"
-            end 
-            #format.csv { send_data to_csv(@todolistall,column,{encoding: 'UTF-8'}) ,:type => 'charset=utf-8; header=present' , :filename => filename}
-        end
+      if !params[:tablename].nil? and params[:tablename].present?
+            
+            model = nil
+            
+            case params[:tablename]
+               when "Music Answer"
+                    model = Answer
+               when "Log Music Answer"
+                    model = Loghistory  
+               when "Form Lock User"
+                    model = Formmanage   
+               when "Teacher Answer"
+                    model = Tanswer  
+               when "Log Teacher Answer"
+                    model = Tloghistory      
+               when "Users"
+                    model = User  
+               when "ALL Universities"
+                    model = Tuniversity   
+               when "ALL Topices"
+                    model = Ttopic  
+               when "ALL Status Jobs"
+                    model = Tstatusjosb
+               when "ALL Positions"
+                    model = Tposition  
+               when "ALL Degree"
+                    model = Tdegree   
+               when "ALL Musics"
+                    model = Musictype  
+               when "ALL Question"
+                    model = Question   
+               when "ALL Schools"
+                    model = School  
+            end
+            if !model.nil?
+                modeldata = model.all
+                @dataexcel = Array.new
+                @sheetname  = params[:tablename]
+                filename = "#{params[:tablename]}_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}"
+                @headerarr  = model.column_names
+                modeldata.each do |data|
+                  @dataexcel.push(data.attributes.values_at(*@headerarr))
+                end
+                respond_to do |format|
+                  format.html
+                  format.xlsx do
+                    response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xlsx"'
+                    render "printexport.xlsx"
+                  end  
+                end
+            end    
+        end    
   end    
   def import
       # @anser1 = sum_all_teacher_by_school(1)#select_music_school(1,'(2,3,4)','IN')

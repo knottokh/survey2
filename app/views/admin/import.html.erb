@@ -3,8 +3,8 @@
       <% flash[:importmsg].each do |error| %>
         <div class="alert alert-success" role="alert"><%=error%></div>
       <%end%>
-  <%end%>
-<%= link_to "CSV" ,exportto_path(format: 'csv')%>
+<%end%>
+
 <%= form_tag adminimport_path , :method => :post, multipart: true do %>
   <%= select_tag :dbtable, options_for_select([ "School","Question"]), {:include_blank => 'Please select Database Table'} %>
   <%= file_field_tag :file %>

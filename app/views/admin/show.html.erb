@@ -37,4 +37,22 @@
         <div id="userforchangeschool" class="card-body list-group">
         </div>
     </div>
+    <div class="card">
+        <div class="card-header bg-primary h3 text-white">Export Data to Excel</div>
+        <div class="card-body">
+            <%= form_tag exportschoolexcel_path(format: "xlsx") , method: :get ,class: "row" do %>
+                  <div class="col-sm-6 form-inline">
+                      <div class="row w-100 mb-2">
+                          <div class="col ml-4">
+                            <%= select_tag :tablename, options_for_select(@dbtype),
+                                prompt: "Select Table", class: "form-control w-100"%>
+                          </div>   
+                          <div class="col-4">
+                              <%= submit_tag "Export to Excel",:id => "exportexceladmin" ,class: 'btn btn-info align-middle'%>
+                          </div>  
+                      </div>     
+                  </div>      
+              <% end %>
+        </div>
+    </div>
 </div>
