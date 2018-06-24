@@ -26,6 +26,6 @@ module Workspace
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     #config.active_job.queue_adapter = :sidekiq
-    config.active_job.queue_adapter = Rails.env.production? ? :sidekiq : :async
+    #config.active_job.queue_adapter = Rails.env.production? ? :sidekiq : :async
   end
 end
