@@ -16,7 +16,9 @@ wb = xlsx_package.workbook
 wb.add_worksheet(:name => "Test") do |sheet|
 
   # each user is a row on your spreadsheet
-  41_000.times do
-        sheet.add_row ["test data"] * 600
-  end
+  if !@dataexcel.empty?
+    @dataexcel.each do |data|
+      sheet.add_row data
+    end
+  end 
 end

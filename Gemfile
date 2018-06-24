@@ -109,3 +109,6 @@ gem 'zip-zip'
 gem 'axlsx', '~> 2.0'
 gem 'acts_as_xlsx'
 gem 'axlsx_rails'
+
+#Background job
+#gem 'sidekiq'
