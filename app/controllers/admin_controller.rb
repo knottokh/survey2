@@ -147,6 +147,9 @@ class AdminController < ApplicationController
             if !params[:rowlimit].nil? and params[:rowlimit].present?
                 limitrow = Integer(params[:rowlimit])
             end
+            if !params[:startid].nil? and params[:startid].present?
+                flash[:lastid] = Integer(params[:startid])
+            end
             
             model = nil
             
