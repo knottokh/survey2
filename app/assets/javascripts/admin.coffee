@@ -90,7 +90,7 @@ $ ->
           if response.users != null
             datahtml = $("<ul class='list-group'><u>")
             for d in response.users
-              datahtml.append("<li class='list-group-item'><span>#{d.prefix}#{d.name}  #{d.surname}  #{d.school_name} #{d.district} #{d.province} #{d.email} #{d.cardnumber}</span><a data-uid='#{d.uid}' class='btn btn-info updateuserid'>update</a></li>")
+              datahtml.append("<li class='list-group-item'><span>#{d.prefix}#{d.name}  #{d.surname}  #{d.school_name} #{d.district} #{d.province} #{d.username} #{d.email} #{d.cardnumber}</span><a data-uid='#{d.uid}' class='btn btn-info updateuserid'>update</a></li>")
             
             $("#userforchangeschool").append datahtml
             $(".updateuserid").on "click", ->  
