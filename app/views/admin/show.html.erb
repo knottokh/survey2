@@ -41,6 +41,14 @@
         <div class="card-header bg-primary h3 text-white">Export Data to Excel</div>
         <div class="card-body">
             <%= form_tag exportschoolexcel_path(format: "xlsx") , method: :get ,class: "row" do %>
+                  <div class="col-sm-12 form-inline">
+                      <div class="row w-100 mb-2">
+                          <div class="col-12">
+                               <span>Row limit</span>
+                               <%= text_field_tag :rowlimit,nil,placeholder:"insert number" %>
+                          </div>  
+                      </div>     
+                  </div> 
                   <div class="col-sm-6 form-inline">
                       <div class="row w-100 mb-2">
                           <div class="col ml-4">

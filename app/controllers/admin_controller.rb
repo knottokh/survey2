@@ -85,11 +85,23 @@ class AdminController < ApplicationController
         end
     end
     def exportAminTable
-        schooldata = School.schoolpercent.order("percent_all desc nulls last")
+        if flash[:lastid].nil? or !flash[:lastid].present? or flash[:islast]
+                 flash[:lastid] = 0
+                 flash[:islast] = false
+        end 
+        limitrow = 20000
+        # .order("percent_all desc") nulls last
+        lastschoolobj = School.schoolpercent.last
+        lastmodelid = (!lastschoolobj.nil? ? lastschoolobj.id : 0)
+        schooldata = School.schoolpercent.where("id > #{flash[:lastid]}").limit(limitrow)
+        flash[:lastid] = (!schooldata.last.nil? ? schooldata.last.id : 0)
+        if flash[:lastid] === lastmodelid
+            flash[:islast] = true
+        end
         @dataexcel = Array.new
         @sheetname  = "school_summary"
-        filename = "school_summary_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}"
-        @headerarr  = ["ministry_code","school_name","percent_all","percent_1","percent_2","percent_3","percent_4","userinscool"]
+        filename = "school_summary_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}_#{flash[:lastid]}_#{lastmodelid}"
+        @headerarr  = ["id","ministry_code","school_name","percent_all","percent_1","percent_2","percent_3","percent_4","userinscool"]
         schooldata.each do |data|
           @dataexcel.push(data.attributes.values_at(*@headerarr))
         end
@@ -100,9 +112,41 @@ class AdminController < ApplicationController
             render "printexport.xlsx"
           end  
         end
-    end
+  end
+  def exportExcelSideqid
+      #ExportToExcelJob.perform_later()
+      filename = "test_sidking_1"
+      respond_to do |format|
+                  format.html
+                  format.xlsx do
+                      #response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xlsx"'
+                      ExportToExcelJob.perform_later
+                    #response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xlsx"'
+                    #render "testsidekiq.xlsx"
+                 end  
+      end
+      #filename  = 'testnaja'
+      #respond_to do |format|
+      #            format.html
+      #            format.xlsx do
+      #              response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xlsx"'
+      #              render "testsidekiq.xlsx"
+      #            end  
+      #end
+  end
   def exportExcel
+      
+           
       if !params[:tablename].nil? and params[:tablename].present?
+            if flash[:tablenametype].nil? or !flash[:tablenametype].present? or   flash[:tablenametype] != params[:tablename] or flash[:islast]
+                 flash[:tablenametype] = params[:tablename]
+                 flash[:lastid] = 0
+                 flash[:islast] = false
+            end 
+            limitrow = 20000
+            if !params[:rowlimit].nil? and params[:rowlimit].present?
+                limitrow = Integer(params[:rowlimit])
+            end
             
             model = nil
             
@@ -137,10 +181,16 @@ class AdminController < ApplicationController
                     model = School  
             end
             if !model.nil?
-                modeldata = model.all
+                flash[:tablenametype] = params[:tablename]
+                lastmodelid = (!model.last.nil? ? model.last.id : 0)
+                modeldata = model.where("id > #{flash[:lastid]}").limit(limitrow);
+                flash[:lastid] = (!modeldata.last.nil? ? modeldata.last.id : 0)
+                if flash[:lastid] === lastmodelid
+                    flash[:islast] = true
+                end
                 @dataexcel = Array.new
                 @sheetname  = params[:tablename]
-                filename = "#{params[:tablename]}_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}"
+                filename = "#{params[:tablename]}_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}_#{flash[:lastid]}_#{lastmodelid}"
                 @headerarr  = model.column_names
                 modeldata.each do |data|
                   @dataexcel.push(data.attributes.values_at(*@headerarr))

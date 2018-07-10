@@ -1,3 +1,4 @@
+#class SchoolDatatable < AjaxDatatablesRails::Base
 class SchoolDatatable < AjaxDatatablesRailsCustom::Base
   def view_columns
     

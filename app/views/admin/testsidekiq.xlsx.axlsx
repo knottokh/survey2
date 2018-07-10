@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(:name => "Test") do |sheet|
+
+  # each user is a row on your spreadsheet
+#  if !@dataexcel.empty?
+#    @dataexcel.each do |data|
+#      sheet.add_row data
+#    end
+#  end 
+end
