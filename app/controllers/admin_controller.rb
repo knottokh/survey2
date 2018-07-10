@@ -91,9 +91,9 @@ class AdminController < ApplicationController
         end 
         limitrow = 20000
         # .order("percent_all desc") nulls last
-        lastschoolobj = School.schoolpercent.last
+        lastschoolobj = School.schoolpercent.order("id asc").last
         lastmodelid = (!lastschoolobj.nil? ? lastschoolobj.id : 0)
-        schooldata = School.schoolpercent.where("id > #{flash[:lastid]}").limit(limitrow)
+        schooldata = School.schoolpercent.where("id > #{flash[:lastid]}").limit(limitrow).order("id asc")
         flash[:lastid] = (!schooldata.last.nil? ? schooldata.last.id : 0)
         if flash[:lastid] === lastmodelid
             flash[:islast] = true
@@ -182,8 +182,9 @@ class AdminController < ApplicationController
             end
             if !model.nil?
                 flash[:tablenametype] = params[:tablename]
-                lastmodelid = (!model.last.nil? ? model.last.id : 0)
-                modeldata = model.where("id > #{flash[:lastid]}").limit(limitrow);
+                lastschoolobj = model.order("id asc").last
+                lastmodelid = (!lastschoolobj.nil? ? lastschoolobj.id : 0)
+                modeldata = model.where("id > #{flash[:lastid]}").limit(limitrow).order("id asc")
                 flash[:lastid] = (!modeldata.last.nil? ? modeldata.last.id : 0)
                 if flash[:lastid] === lastmodelid
                     flash[:islast] = true
