@@ -208,7 +208,61 @@ class AdminController < ApplicationController
                 end
             end    
         end    
-  end    
+  end  
+  def exportExcelCustomMerge
+            if flash[:lastid].nil? or !flash[:lastid].present? or flash[:islast]
+                 flash[:lastid] = 0
+                 flash[:islast] = false
+            end 
+            limitrow = 500
+            if !params[:rowlimit].nil? and params[:rowlimit].present?
+                limitrow = Integer(params[:rowlimit])
+            end
+            if !params[:startid].nil? and params[:startid].present?
+                flash[:lastid] = Integer(params[:startid])
+            end
+            
+            model = School
+            lastschoolobj = model.order("id asc").last
+                lastmodelid = (!lastschoolobj.nil? ? lastschoolobj.id : 0)
+                modeldata = model.where("id > #{flash[:lastid]}").limit(limitrow).order("id asc")
+                flash[:lastid] = (!modeldata.last.nil? ? modeldata.last.id : 0)
+                if flash[:lastid] === lastmodelid
+                    flash[:islast] = true
+                end
+                @dataexcel = Array.new
+                @sheetname  = params[:tablename]
+                filename = "#{params[:tablename]}_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}_#{flash[:lastid]}_#{lastmodelid}"
+                @headerarr  = Array.new.concat(model.column_names)
+                headerinsilde = Array.new.concat(model.column_names)
+                questionList = Question.order("id asc")
+                questionList.each do |qhdata|
+                    @headerarr.push("QID_#{qhdata.title}_#{qhdata.id}_1")
+                    @headerarr.push("QID_#{qhdata.title}_#{qhdata.id}_2")
+                end      
+                modeldata.each do |data|
+                  dataarr = Array.new
+                  dataarr = data.attributes.values_at(*headerinsilde)
+                  questionList.each do |qdata|
+                      answerList = Answer.where("school_id = #{data.id} and question_id = #{qdata.id}").last
+                      if !answerList.nil?
+                          dataarr.push(answerList.answer)
+                          dataarr.push(answerList.answer2)
+                      else
+                          dataarr.push("-")
+                          dataarr.push("-")
+                      end
+                  end  
+                  @dataexcel.push(dataarr)
+                end
+                respond_to do |format|
+                  format.html
+                  format.xlsx do
+                    response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xlsx"'
+                    render "printexport.xlsx"
+                  end  
+                end
+  end
   def import
       # @anser1 = sum_all_teacher_by_school(1)#select_music_school(1,'(2,3,4)','IN')
       #@anser1 = Devise::Encryptors::Aes256.decrypt("$2a$11$YtzV.NT9eXIqnOi0iSCLmO5AqOgF8YKq7Pda5lZUdNjsO.NAkwFY2" , Devise.pepper)

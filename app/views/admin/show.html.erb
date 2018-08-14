@@ -67,4 +67,30 @@
               <% end %>
         </div>
     </div>
+    <div class="card">
+        <div class="card-header bg-primary h3 text-white">Export Merge Data to Excel</div>
+        <div class="card-body">
+            <%= form_tag exportschoolcustommerge_path(format: "xlsx") , method: :get ,class: "row" do %>
+                  <div class="col-sm-12 form-inline">
+                      <div class="row w-100 mb-2">
+                          <div class="col-12">
+                               <span>Start ID</span>
+                               <%= text_field_tag :startid,nil,placeholder:"insert number" %>
+                          </div>  
+                          <div class="col-12">
+                               <span>Row limit</span>
+                               <%= text_field_tag :rowlimit,nil,placeholder:"insert number" %>
+                          </div>  
+                      </div>     
+                  </div> 
+                  <div class="col-sm-6 form-inline">
+                      <div class="row w-100 mb-2">
+                          <div class="col-4">
+                              <%= submit_tag "Export to Excel",:id => "exportexceladmin2" ,class: 'btn btn-info align-middle'%>
+                          </div>  
+                      </div>     
+                  </div>      
+              <% end %>
+        </div>
+    </div>
 </div>

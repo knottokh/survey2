@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get '/exportto' => 'admin#exportTo'
   get '/exportschool' => 'admin#exportAminTable'
   get '/exportschoolexcel' => 'admin#exportExcel'
+  get '/exportschoolcustommerge' => 'admin#exportExcelCustomMerge'
   get '/admindashboard' => 'admin#show'
   get '/searchuser' => 'admin#searchuser'
   post '/updateuserschool' => 'admin#updateuserschool'

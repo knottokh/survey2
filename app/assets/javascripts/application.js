@@ -120,7 +120,7 @@ $(function(){
             }
         });
         
-     $("#exportexceladmin").removeAttr('data-disable-with');
+     $("#exportexceladmin,#exportexceladmin2").removeAttr('data-disable-with');
        
 })
 function setOtherShowHideStatus(val,elm){
