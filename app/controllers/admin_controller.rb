@@ -231,8 +231,8 @@ class AdminController < ApplicationController
                     flash[:islast] = true
                 end
                 @dataexcel = Array.new
-                @sheetname  = params[:tablename]
-                filename = "#{params[:tablename]}_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}_#{flash[:lastid]}_#{lastmodelid}"
+                @sheetname  = "School Merge"
+                filename = "School Merge_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}_#{flash[:lastid]}_#{lastmodelid}"
                 @headerarr  = Array.new.concat(model.column_names)
                 headerinsilde = Array.new.concat(model.column_names)
                 questionList = Question.order("id asc")
@@ -286,8 +286,8 @@ def exportExcelTeacher
                     flash[:islast] = true
                 end
                 @dataexcel = Array.new
-                @sheetname  = params[:tablename]
-                filename = "#{params[:tablename]}_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}_#{flash[:lastid]}_#{lastmodelid}"
+                @sheetname  = "Teacher Merge"
+                filename = "Teacher Merge_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}_#{flash[:lastid]}_#{lastmodelid}"
                 
                 headerinsilde = ["ansid","prefix",
                     "name","surname","status","position","degree","branch","university","topic","remark","fromdep",
