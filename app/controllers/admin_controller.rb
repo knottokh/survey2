@@ -263,6 +263,50 @@ class AdminController < ApplicationController
                   end  
                 end
   end
+def exportExcelTeacher
+            if flash[:lastid].nil? or !flash[:lastid].present? or flash[:islast]
+                 flash[:lastid] = 0
+                 flash[:islast] = false
+            end 
+            limitrow = 500
+            if !params[:rowlimit].nil? and params[:rowlimit].present?
+                limitrow = Integer(params[:rowlimit])
+            end
+            if !params[:startid].nil? and params[:startid].present?
+                flash[:lastid] = Integer(params[:startid])
+            end
+            
+            model = Tanswer
+            modelschool = School
+            lastschoolobj = model.order("id asc").last
+            lastmodelid = (!lastschoolobj.nil? ? lastschoolobj.id : 0)
+            modeldata = model.joins(:school).select("tanswers.id as ansid,*").where("tanswers.id > #{flash[:lastid]}").limit(limitrow).order("tanswers.id asc")
+                flash[:lastid] = (!modeldata.last.nil? ? modeldata.last.ansid : 0)
+                if flash[:lastid] === lastmodelid
+                    flash[:islast] = true
+                end
+                @dataexcel = Array.new
+                @sheetname  = params[:tablename]
+                filename = "#{params[:tablename]}_#{Time.zone.now.strftime("%Y%m%d  %H%M%S")}_#{flash[:lastid]}_#{lastmodelid}"
+                
+                headerinsilde = ["ansid","prefix",
+                    "name","surname","status","position","degree","branch","university","topic","remark","fromdep",
+                    "school_id","education_area","ministry_code","school_name","municipal_area","district","province",
+                    "postcode","zone","students_count","percent_all","percent_1","percent_2","percent_3","percent_4"]
+                @headerarr  = Array.new.concat(headerinsilde)
+                modeldata.each do |data|
+                  dataarr = Array.new
+                  dataarr = data.attributes.values_at(*headerinsilde)
+                  @dataexcel.push(dataarr)
+                end
+                respond_to do |format|
+                  format.html
+                  format.xlsx do
+                    response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xlsx"'
+                    render "printexport.xlsx"
+                  end  
+                end
+  end
   def import
       # @anser1 = sum_all_teacher_by_school(1)#select_music_school(1,'(2,3,4)','IN')
       #@anser1 = Devise::Encryptors::Aes256.decrypt("$2a$11$YtzV.NT9eXIqnOi0iSCLmO5AqOgF8YKq7Pda5lZUdNjsO.NAkwFY2" , Devise.pepper)
